@@ -1,0 +1,6 @@
+@media (max-width:576px){
+    .produtos{
+        margin: 0 2em;
+        gap: 1em;
+    }
+}

@@ -1,5 +1,6 @@
 import { NavTop } from './components/NavTop';
 import { NavBottom } from './components/NavBottom';
+import './style.css'
 
 export const Navbar = () => {
     return (

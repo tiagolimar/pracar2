@@ -3,11 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { App } from "./App";
 
-import { Home } from './Pages/Home';
-import { AreaProduto } from './Pages/AreaProduto';
+import { Produtos } from './Pages/Produtos';
+/* import { Produto } from './Pages/Produto';
 import { Carrinho } from './Pages/Carrinho';
 import { Login } from "./Pages/Login";
-import { SignIn } from "./Pages/SignIn";
+import { Cadastro } from "./Pages/Cadastro"; */
 
 import { Error } from './Pages/Error';
 
@@ -21,17 +21,17 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />,
+                element: <Produtos />,
                 errorElement: <Error />,
             },
             {
                 path: "/home",
-                element: <Home />,
+                element: <Produtos />,
                 errorElement: <Error />,
             },
-            {
+/*             {
                 path: "/produto/:nomeUnico",
-                element: <AreaProduto />,
+                element: <Produto />,
                 errorElement: <Error />,
             },
             {
@@ -45,10 +45,10 @@ const router = createBrowserRouter([
                 errorElement: <Error />,
             },
             {
-                path: "/signin",
-                element: <SignIn />,
+                path: "/cadastro",
+                element: <Cadastro />,
                 errorElement: <Error />,
-            },
+            }, */
         ],
     },
 ]);

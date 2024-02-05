@@ -1,6 +1,7 @@
+import './style.css'
 
 export const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer className='text-center'>Footer</footer>
   )
 }
