@@ -1,0 +1,19 @@
+.nav-bottom{
+    margin-top: -8px;
+    width: 100%;
+    border-top: 1px solid #dedede;
+}
+
+.nav-item a{
+    text-decoration: none;
+    color: var(--primary);
+    padding: 2px;
+    transition-duration: 200ms;
+}
+
+.nav-item a:hover{
+    /* -webkit-text-stroke-width: medium; */
+    font-weight: bold;
+    border-bottom: 2px solid var(--primary);
+    transition-duration: 200ms;
+}
