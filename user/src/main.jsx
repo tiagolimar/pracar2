@@ -3,15 +3,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { App } from "./App";
 
-import { Home } from './components/Home/index';
-import { AreaProduto } from './components/AreaProduto/index';
-import { Carrinho } from './components/Carrinho/index';
-import { Login } from "./pages/Login";
-import { SignIn } from "./pages/SignIn";
+import { Home } from './Pages/Home';
+import { AreaProduto } from './Pages/AreaProduto';
+import { Carrinho } from './Pages/Carrinho';
+import { Login } from "./Pages/Login";
+import { SignIn } from "./Pages/SignIn";
 
-import { Error } from './components/Error/index';
+import { Error } from './Pages/Error';
 
-import "./main.css";
+import "./index.css";
 
 const router = createBrowserRouter([
     {
