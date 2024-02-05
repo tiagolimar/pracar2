@@ -8,9 +8,12 @@
     text-decoration: none;
     color: var(--primary);
     padding: 2px;
+    transition-duration: 200ms;
 }
 
 .nav-item a:hover{
-    -webkit-text-stroke-width: medium;
+    /* -webkit-text-stroke-width: medium; */
+    font-weight: bold;
     border-bottom: 2px solid var(--primary);
+    transition-duration: 200ms;
 }
