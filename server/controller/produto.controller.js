@@ -1,3 +1,4 @@
+import sequelize from 'sequelize';
 import db from '../model/index.js';
 
 const Produto = db.produto;
