@@ -1,34 +1,43 @@
-import img_bolo from '../../assets/bolo-mole.png';
+import React, { useState, useEffect } from 'react';
+import { ItemProduto } from './ItemProduto';
+
 import './style.css'
 
-const ItemProduto = ({ produto }) => {
-    return (
-        <div className="cartao-produto d-flex flex-column mt-2">
-            <img src={produto.img} alt={produto.nome} className='rounded-4 shadow-sm mb-2'/>
-            <header className='d-flex justify-content-between gap-2'>
-                <h2>{produto.nome}</h2>
-                <p>R$ {produto.preco.toFixed(2)}</p>
-            </header>
-            <p>{produto.descricao}</p>
-        </div>
-    );
-};
-
-export const Produtos = () => {
-    const listaProdutos = [...Array(12)].map((id) => ({
-        id: parseInt(`213${id}`),
-        nome: "Bolo mole",
-        descricao: "Uma fatia de bolo mole de aproximadamente  150g",
-        categoria: "Bolo e Tapioca",
-        preco: 4.5,
-        img: img_bolo,
-    }));
+const Categoria = ({ nomeCategoria }) => {
+    const [produtos, setProdutos] = useState([]);
+    
+    useEffect(() => {
+        fetch(`https://db-praca-r2.onrender.com/api/produto/categoria/${nomeCategoria}`)
+            .then(res => res.json())
+            .then(setProdutos)
+            .catch(error => console.error('Erro ao carregar produtos:', error));
+    }, [nomeCategoria]);
 
     return (
         <div className="produtos row  row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-            {listaProdutos.map((produto, id) => (
+            {produtos.map((produto, id) => (
                 <ItemProduto key={id} produto={produto} />
             ))}
         </div>
     );
 };
+
+export const Produtos = () => {
+    const [categorias, setCategorias] = useState([]);
+    
+    useEffect(() => {
+        fetch('https://db-praca-r2.onrender.com/api/produto/categorias')
+            .then(res => res.json())
+            .then(setCategorias)
+            .catch(error => console.error('Erro ao carregar categorias:', error));
+    }, []);
+
+    return (
+        <div>
+            {categorias.map((categoria,id) => (
+                <Categoria key={id} nomeCategoria={categoria} />
+            ))}
+        </div>
+    );
+};
+

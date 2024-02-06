@@ -79,13 +79,30 @@ export const produtoController = {
             raw: true
         })
         .then(categories => {
-            response.send(categories);
+            const categoriesList = categories.map(cat => cat.categoria)
+            response.send(categoriesList);
         })
         .catch(e => {
             response.status(500).send({ message: e.message || 'Erro ao buscar categorias.' });
         });
     },    
 
+    findByCategory: (request, response) => {
+        const categoria = request.params.categoria;
+    
+        Produto.findAll({
+            where: {
+                categoria: categoria
+            }
+        })
+        .then(products => {
+            response.send(products);
+        })
+        .catch(e => {
+            response.status(500).send({ message: e.message || `Erro ao buscar produtos da categoria ${categoria}.` });
+        });
+    },
+     
     update: async (request,response)=>{
         const id = request.params.id;
         const produto = request.body;

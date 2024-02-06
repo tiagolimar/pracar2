@@ -10,6 +10,7 @@ export const routeProduto = ()=>{
     router.get('/produtos', produtoController.findAll)
     router.get('/produto/id/:id', produtoController.findById)
     router.get('/produto/categorias', produtoController.findCategories)
+    router.get('/produtos/categoria/:categoria', produtoController.findByCategory)
     router.get('/produtos/status/:status', produtoController.findByStatus)
     router.patch('/produto/id/:id', produtoController.update)
     router.delete('/produto/id/:id', produtoController.deleteById)
