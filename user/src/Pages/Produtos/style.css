@@ -4,3 +4,15 @@
         gap: 1em;
     }
 }
+
+
+.cartao-produto header p{
+    white-space: nowrap;
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: -0.25em;
+}
+
+.cartao-produto p{
+    margin-top: -0.75em;
+}
