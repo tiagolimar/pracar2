@@ -72,6 +72,19 @@ export const produtoController = {
         })
     },
 
+    findCategories: (request, response) => {
+        Produto.findAll({
+            attributes: [[sequelize.fn('DISTINCT', sequelize.col('categoria')), 'categoria']],
+            raw: true
+        })
+        .then(categories => {
+            response.send(categories);
+        })
+        .catch(e => {
+            response.status(500).send({ message: e.message || 'Erro ao buscar categorias.' });
+        });
+    },    
+
     update: async (request,response)=>{
         const id = request.params.id;
         const produto = request.body;
