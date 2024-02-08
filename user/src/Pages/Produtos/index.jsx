@@ -15,18 +15,20 @@ const Categoria = ({ nomeCategoria }) => {
     }, [nomeCategoria]);
 
     return (
-        <div className="produtos row  row-cols-sm-2 row-cols-md-4 row-cols-lg-6 border-top border-3 border-dark bg-light shadow mt-4 rounded">
+        <div className="produtos border-top border-3 border-dark bg-light shadow mt-4 rounded">
             <h2 className='text-center'>{nomeCategoria}</h2>
-            {produtos.map((produto, id) => (
-                <ItemProduto key={id} produto={produto} />
-            ))}
+            <div className="produtos-container row row-cols-2 border">
+                {produtos.map((produto, id) => (
+                    <ItemProduto key={id} produto={produto} />
+                ))}
+            </div>
         </div>
     );
 };
 
 const Banner = ()=>{
     return(
-        <div className="banner d-flex align-items-center justify-content-center bg-dark text-white">
+        <div className="banner d-flex align-items-center justify-content-center text-white fs-2">
         BANNER
     </div>
     )
@@ -43,12 +45,14 @@ export const Produtos = () => {
     }, []);
 
     return (
-        <div className='mb-4'>
+        <main>
             <Banner />
-            {categorias.map((categoria,id) => (
-                <Categoria key={id} nomeCategoria={categoria} />
-            ))}
-        </div>
+                <section className='secao-produtos mb-4 ms-4 me-4'>
+                    {categorias.map((categoria,id) => (
+                        <Categoria key={id} nomeCategoria={categoria} />
+                    ))}
+                </section>
+        </main>
     );
 };
 

@@ -1,0 +1,12 @@
+.cartao-produto.cartao-produto-info {
+    width: calc( 100% - 200px );
+}
+
+.cartao-produto-img{
+    width: 200px;
+    height: 200px;
+}
+
+.cartao-produto-img img {
+    width: 100%;
+}
