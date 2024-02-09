@@ -1,4 +1,3 @@
-import carrinhoIcon from "../../../../assets/icons8-carrinho-50.png";
 import './style.css'
 
 export const NavTop = () => {
@@ -8,9 +7,6 @@ export const NavTop = () => {
             <div className="nav-search me-3">
                 <div className="nav-search-icon"></div>
                 <input type="text" className="form-control" />
-            </div>
-            <div className="nav-carrinho-icon">
-                <img src={carrinhoIcon} alt="ícone de carrinho" />
             </div>
         </div>
     );
