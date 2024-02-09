@@ -16,7 +16,7 @@ export const Home = () => {
 
     return (
         <main>
-            <Banner />
+            <Banner dadosEvento={{}} />
                 <section className='secao-produtos mb-4 ms-4 me-4'>
                     {categorias.map((categoria,id) => (
                         <Categoria key={id} nomeCategoria={categoria} />
