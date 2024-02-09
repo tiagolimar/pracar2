@@ -3,7 +3,7 @@ import './style.css'
 
 export const Navbar = () => {
     return (
-        <nav className="navbar pb-0 justify-content-center gap-3 shadow-sm">
+        <nav className="navbar pb-0 ps-3 gap-3">
             <NavTop />
         </nav>
     );

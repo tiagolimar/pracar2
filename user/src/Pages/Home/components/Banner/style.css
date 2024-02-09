@@ -1,0 +1,22 @@
+section.banner{
+    color: white;
+    height: 300px;
+}
+
+section.banner>img{
+    position: absolute;
+    width:  100%;
+    height:  100%;
+    object-fit:cover;
+    overflow: hidden;
+    z-index:  0;
+}
+
+section.banner .banner-fg{
+    width: 100%;
+    z-index: 1;
+}
+
+section.banner .banner-fg img{
+    width: 50px;
+}
