@@ -1,0 +1,17 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+
+main{
+    width: 100vw;
+    max-width:600px
+}
+
+main a{
+    text-decoration: none;
+}
+
+a:hover{
+    font-weight: bold;
+}
