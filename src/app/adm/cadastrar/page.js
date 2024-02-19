@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { URL_CADASTRO } from './../url';
 
 export default function Cadastrar() {
   const router = useRouter();
@@ -21,18 +22,14 @@ export default function Cadastrar() {
       alert("As senhas não coincidem.")
       return null;
     }
-    // const response = await fetch('/api/cadastrar', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ nome, senha, confirm_senha })
-    // });
-    // const data = await response.json();
 
-    const data = {
-      success: true,
-      message: 'Login realizado com sucesso!',
-      type: 'alert-success'
-    };
+    const response = await fetch(URL_CADASTRO, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, senha })
+    });
+
+    const data = await response.json();
 
     if (data.success){
       alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir")
