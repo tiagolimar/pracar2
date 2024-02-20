@@ -13,29 +13,28 @@ export default function Cadastrar() {
 		const senha = e.target.elements.senha.value;
 		const confirm_senha = e.target.elements.confirm_senha.value;
 
-		if (!(nome && senha && confirm_senha)){
-			alert("Preencha todos os campos.")
-			return null;
-		}
+		if (nome && senha && confirm_senha){
+			if (senha == confirm_senha){
 
-		if (senha != confirm_senha){
-			alert("As senhas não coincidem.")
-			return null;
-		}
+				const response = await fetch(URL_CADASTRO, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ nome, senha })
+				});
 
-		const response = await fetch(URL_CADASTRO, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ nome, senha })
-		});
-		console.log(response);
-		const data = await response.json();
-
-		if (data.message){
-			alert(data.message)
+				const data = await response.json();
+		
+				if (data.message){
+					alert("Já existe uma praça com esse nome.")
+				}else{
+					alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.")
+					router.push('/adm');
+				}
+			}else{
+				alert("As senhas não coincidem.")
+			}
 		}else{
-			alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir")
-			router.push('/adm');
+			alert("Preencha todos os campos.")
 		}
 	};
 

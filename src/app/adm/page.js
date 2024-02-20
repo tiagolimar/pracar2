@@ -5,6 +5,12 @@ import { useRouter } from 'next/navigation';
 
 import { URL_LOGIN } from './url';
 
+function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+}
+
 export default function Login (){
     const router = useRouter();
 
@@ -19,7 +25,7 @@ export default function Login (){
         }
     
         const response = await fetch(URL_LOGIN, {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nome, senha })
         });
@@ -27,9 +33,10 @@ export default function Login (){
         const data = await response.json();
     
         if (data.createdAt){
-            console.log(data);
-            // alert("O login foi realizado com sucesso! Você será redirecionado ao sistema de gerenciamento.")
-            // router.push('/adm/gerenciador/SejaBemVindo');
+            const token = data.token
+            setCookie('auth_token_pracar2', token, 7);
+            alert("O login foi realizado com sucesso! Você será redirecionado ao sistema de gerenciamento.")
+            router.push('/adm/gerenciador/SejaBemVindo');
         }else{
             alert("Nome ou senha não conferem")
         }
@@ -40,8 +47,8 @@ export default function Login (){
         <h1>Praça R2</h1>
         <h3 className="text-secondary">Login</h3>
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
-            <input className="form-control" placeholder="Nome da praça" type="text" />
-            <input className="form-control" placeholder="Senha" type="password" />
+            <input className="form-control" name="nome" placeholder="Nome da praça" type="text" />
+            <input className="form-control" name="senha" placeholder="Senha" type="password" />
             <button className="btn btn-dark"> Fazer Login</button>
         </form>
         <div className="d-flex col-12 justify-content-between">
