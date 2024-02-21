@@ -25,7 +25,8 @@ export default function Cadastrar() {
 				const data = await response.json();
 		
 				if (data.message){
-					alert("Já existe uma praça com esse nome.")
+					console.log(data.message);
+					alert("Não foi possível realizar o cadastro.")
 				}else{
 					alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.")
 					router.push('/adm');
@@ -43,9 +44,9 @@ export default function Cadastrar() {
 		<h1>Praça R2</h1>
 		<h3 className="text-secondary">Cadastro</h3>
 		<form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
-			<input className="form-control" name="nome" placeholder="Nome da praça" type="text" />
-			<input className="form-control" name="senha" placeholder="Senha" type="password" />
-			<input className="form-control" name="confirm_senha" placeholder="Confirmar nova senha" type="password" />
+			<input className="form-control" name="nome" placeholder="Nome da praça" type="text" required />
+			<input className="form-control" name="senha" placeholder="Senha" type="password" minLength={6} required />
+			<input className="form-control" name="confirm_senha" placeholder="Confirmar nova senha" type="password" minLength={6} required />
 			<button className="btn btn-dark" type="submit">Cadastrar</button>
 		</form>
 		<div className="d-flex col-12 justify-content-between">
