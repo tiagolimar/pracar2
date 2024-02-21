@@ -6,7 +6,7 @@ import { URL_CADASTRO } from './../url';
 
 export default function Cadastrar() {
 	const router = useRouter();
-
+	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const nome = e.target.elements.nome.value;
@@ -15,7 +15,7 @@ export default function Cadastrar() {
 
 		if (nome && senha && confirm_senha){
 			if (senha == confirm_senha){
-
+				
 				const response = await fetch(URL_CADASTRO, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -25,8 +25,7 @@ export default function Cadastrar() {
 				const data = await response.json();
 		
 				if (data.message){
-					console.log(data.message);
-					alert("Não foi possível realizar o cadastro.")
+					alert("O nome informado já existe.")
 				}else{
 					alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.")
 					router.push('/adm');
