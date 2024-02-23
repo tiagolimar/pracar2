@@ -21,6 +21,7 @@ export default function AlterarSenha (){
 				const senha_criptografada = await bcrypt.hash(nova_senha, 10);
 				const response = await fetch(URL_UPDATE, {
 					method: 'PATCH',
+					mode: 'cors',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify({nome, senha, nova_senha:senha_criptografada })
 				});

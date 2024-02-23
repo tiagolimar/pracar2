@@ -20,6 +20,7 @@ export default function Cadastrar() {
 				const senha_criptografada = await bcrypt.hash(senha, 10);
 				const response = await fetch(URL_CADASTRO, {
 					method: 'POST',
+					mode: 'cors',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify({ nome, senha:senha_criptografada })
 				});
