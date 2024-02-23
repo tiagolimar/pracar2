@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import bcrypt from 'bcryptjs';
+
 import { URL_CADASTRO } from './../url';
 
 export default function Cadastrar() {
@@ -15,11 +17,11 @@ export default function Cadastrar() {
 
 		if (nome && senha && confirm_senha){
 			if (senha == confirm_senha){
-				
+				const senha_criptografada = await bcrypt.hash(senha, 10);
 				const response = await fetch(URL_CADASTRO, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ nome, senha })
+					body: JSON.stringify({ nome, senha:senha_criptografada })
 				});
 
 				const data = await response.json();
@@ -28,7 +30,7 @@ export default function Cadastrar() {
 					alert("O nome informado já existe.")
 				}else{
 					alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.")
-					router.push('/adm');
+					router.push('/adm/login');
 				}
 			}else{
 				alert("As senhas não coincidem.")

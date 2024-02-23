@@ -23,7 +23,7 @@ export default function Login (){
             alert("Preencha todos os campos.");
             return null;
         }
-    
+
         const response = await fetch(URL_LOGIN, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

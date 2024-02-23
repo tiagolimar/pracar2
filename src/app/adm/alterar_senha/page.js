@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation";
+import bcrypt from 'bcryptjs';
 
 export default function AlterarSenha (){
 	const router = useRouter();
@@ -15,26 +16,30 @@ export default function AlterarSenha (){
 
 		if (nome && senha && nova_senha && confirm_senha){
 			if (nova_senha == confirm_senha){
-				
-				const response = await fetch(URL_CADASTRO, {
+				const senha_criptografada = await bcrypt.hash(nova_senha, 10);
+
+				const response = await fetch(URL_UPDATE, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ nome, senha, nova_senha })
+					body: JSON.stringify({ 
+						nome, 
+						senha,
+						nova_senha:senha_criptografada })
 				});
-
+				
 				const data = await response.json();
                 
 				if (data.message){
 					alert("O nome informado não existe.")
 				}else{
 					alert("O cadastro foi atualizado com sucesso! Faça o login na página a seguir.")
-					router.push('/adm');
+					router.push('/adm/login');
 				}
 			}else{
-				alert("As senhas não coincidem.")
+				alert("As senhas novas não coincidem.")
 			}
 		}else{
-			alert("Preencha todos os campos.")
+			alert("Preencha todos os campos!")
 		}
 	};
 
@@ -43,7 +48,9 @@ export default function AlterarSenha (){
         <h1>Praça R2</h1>
         <h3 className="text-secondary">Alteração de Senha</h3>
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
-            <input className="form-control" name="nome" placeholder="Nome da praça" type="text" required />
+            <input className="form-control" name="nome" placeholder="Nome da praça" 
+				type="text" 
+				required />
             <input className="form-control" name="senha" placeholder="Senha" type="password" required />
             <input className="form-control" name="nova_senha" placeholder="Nova senha" type="password" required />
             <input className="form-control" name="confirm_senha" placeholder="Confirmar nova senha" type="password" required />
