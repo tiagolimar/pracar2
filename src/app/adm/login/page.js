@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 import { URL_LOGIN } from '../url';
 
@@ -24,27 +25,26 @@ export default function Login (){
             return null;
         }
 
-        const response = await fetch(URL_LOGIN, {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome, senha })
-        });
+        try {
+            const response = await axios.post(URL_LOGIN, { nome, senha })
+            const data = await response.json();
+        
+            if (data.createdAt){
+                const token = data.token;
+                const url = data.url;
     
-        const data = await response.json();
+                setCookie('auth_token_pracar2', token, 7);
     
-        if (data.createdAt){
-            const token = data.token;
-            const url = data.url;
-
-            setCookie('auth_token_pracar2', token, 7);
-
-            alert("O login foi realizado com sucesso! Você será redirecionado ao sistema de gerenciamento.");
-
-            router.push(`/adm/painel/${url}`);
-        }else{
-            alert("Nome ou senha não conferem")
+                alert("O login foi realizado com sucesso! Você será redirecionado ao sistema de gerenciamento.");
+    
+                router.push(`/adm/painel/${url}`);
+            }else{
+                alert("Nome ou senha não conferem")
+            }
+        } catch (error) {
+            console.error(error);
         }
+    
     };
     
     return(

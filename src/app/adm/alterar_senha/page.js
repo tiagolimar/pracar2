@@ -19,20 +19,19 @@ export default function AlterarSenha (){
 		if (nome && senha && nova_senha && confirm_senha){
 			if (nova_senha == confirm_senha){
 				const senha_criptografada = await bcrypt.hash(nova_senha, 10);
-				const response = await fetch(URL_UPDATE, {
-					method: 'PATCH',
-					mode: 'cors',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({nome, senha, nova_senha:senha_criptografada })
-				});
-				
-				const data = await response.json();
-                
-				if (data.message){
-					alert("O nome informado não existe.")
-				}else{
-					alert("O cadastro foi atualizado com sucesso! Faça o login na página a seguir.")
-					router.push('/adm/login');
+
+				try {
+					const response = await axios.patch(URL_UPDATE, {nome, senha, nova_senha:senha_criptografada })
+					const data = await response.json();
+					
+					if (data.message){
+						alert("O nome informado não existe.")
+					}else{
+						alert("O cadastro foi atualizado com sucesso! Faça o login na página a seguir.")
+						router.push('/adm/login');
+					}
+				} catch (error) {
+					console.error(error);
 				}
 			}else{
 				alert("As senhas novas não coincidem.")

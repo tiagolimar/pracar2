@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import bcrypt from 'bcryptjs';
 
 import { URL_CADASTRO } from './../url';
+import axios from 'axios';
 
 export default function Cadastrar() {
 	const router = useRouter();
@@ -18,20 +19,19 @@ export default function Cadastrar() {
 		if (nome && senha && confirm_senha){
 			if (senha == confirm_senha){
 				const senha_criptografada = await bcrypt.hash(senha, 10);
-				const response = await fetch(URL_CADASTRO, {
-					method: 'POST',
-					mode: 'cors',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ nome, senha:senha_criptografada })
-				});
 
-				const data = await response.json();
-		
-				if (data.message){
-					alert("O nome informado já existe.")
-				}else{
-					alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.")
-					router.push('/adm/login');
+				try {
+					const response = await axios.post(URL_CADASTRO,{ nome, senha:senha_criptografada })
+					const data = await response.json();
+			
+					if (data.message){
+						alert("O nome informado já existe.")
+					}else{
+						alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.")
+						router.push('/adm/login');
+					}
+				} catch (error) {
+					console.error(error)
 				}
 			}else{
 				alert("As senhas não coincidem.")
