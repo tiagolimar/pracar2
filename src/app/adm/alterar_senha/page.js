@@ -4,6 +4,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation";
 import bcrypt from 'bcryptjs';
 
+import { URL_UPDATE } from "../url.js";
+
 export default function AlterarSenha (){
 	const router = useRouter();
 	
@@ -17,14 +19,10 @@ export default function AlterarSenha (){
 		if (nome && senha && nova_senha && confirm_senha){
 			if (nova_senha == confirm_senha){
 				const senha_criptografada = await bcrypt.hash(nova_senha, 10);
-
 				const response = await fetch(URL_UPDATE, {
-					method: 'POST',
+					method: 'PATCH',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ 
-						nome, 
-						senha,
-						nova_senha:senha_criptografada })
+					body: JSON.stringify({nome, senha, nova_senha:senha_criptografada })
 				});
 				
 				const data = await response.json();
