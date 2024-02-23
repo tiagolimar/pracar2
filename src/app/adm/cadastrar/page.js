@@ -21,7 +21,7 @@ export default function Cadastrar() {
 				const senha_criptografada = await bcrypt.hash(senha, 10);
 
 				try {
-					const response = await axios.post(URL_CADASTRO,{ nome, senha:senha_criptografada })
+					const response = await axios.post(URL_CADASTRO,{ nome, senha:senha_criptografada },{withCredentials: false})
 					const data = await response.json();
 			
 					if (data.message){
