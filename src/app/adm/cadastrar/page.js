@@ -12,7 +12,7 @@ export default function Cadastrar() {
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const nome = e.target.elements.nome.value;
+		const nome = e.target.elements.nome.value.toUpperCase();
 		const senha = e.target.elements.senha.value;
 		const confirm_senha = e.target.elements.confirm_senha.value;
 
@@ -21,16 +21,21 @@ export default function Cadastrar() {
 				const senha_criptografada = await bcrypt.hash(senha, 10);
 
 				try {
-					const data = await axios.post(URL_CADASTRO,{ nome, senha:senha_criptografada })
+					const data = await axios.post(URL_CADASTRO,{ nome, senha:senha_criptografada });
 			
 					if (data.status!=200){
-						alert("O nome informado já existe.")
+						alert("O nome informado já existe.");
 					}else{
-						alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.")
+						alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.");
 						router.push('/adm/login');
 					}
 				} catch (error) {
-					console.error(error)
+                    const message = error.response.data?.message
+                    if(message){
+                        alert(message);
+                    }else{
+                        console.error(error);
+                    }
 				}
 			}else{
 				alert("As senhas não coincidem.")
@@ -45,7 +50,7 @@ export default function Cadastrar() {
 		<h1>Praça R2</h1>
 		<h3 className="text-secondary">Cadastro</h3>
 		<form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
-			<input className="form-control" name="nome" placeholder="Nome da praça" type="text" required />
+			<input className="form-control" name="nome" placeholder="Nome da praça" type="text" pattern="[^\d].{2,}" title="Por favor, insira pelo menos 3 caracteres com o primeiro não sendo um número." required />
 			<input className="form-control" name="senha" placeholder="Senha" type="password" minLength={6} required />
 			<input className="form-control" name="confirm_senha" placeholder="Confirmar nova senha" type="password" minLength={6} required />
 			<button className="btn btn-dark" type="submit">Cadastrar</button>

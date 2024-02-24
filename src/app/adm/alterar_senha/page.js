@@ -12,7 +12,7 @@ export default function AlterarSenha (){
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const nome = e.target.elements.nome.value;
+		const nome = e.target.elements.nome.value.toUpperCase();
 		const senha = e.target.elements.senha.value;
 		const nova_senha = e.target.elements.nova_senha.value;
 		const confirm_senha = e.target.elements.confirm_senha.value;
@@ -31,7 +31,12 @@ export default function AlterarSenha (){
 						router.push("/adm/login");
 					}
 				} catch (error) {
-					console.error(error);
+                    const message = error.response.data?.message;
+                    if(message){
+                        alert(message);
+                    }else{
+                        console.error(error);
+                    }
 				}
 			}else{
 				alert("As senhas novas não coincidem.")

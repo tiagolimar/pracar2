@@ -17,7 +17,7 @@ export default function Login (){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const nome = e.target.elements.nome.value;
+        const nome = e.target.elements.nome.value.toUpperCase();
         const senha = e.target.elements.senha.value;
     
         if (!(nome && senha)){
@@ -41,7 +41,12 @@ export default function Login (){
                 alert("Nome ou senha não conferem")
             }
         } catch (error) {
-            console.error(error);
+            const message = error.response.data?.message;
+            if(message){
+                alert(message);
+            }else{
+                console.error(error);
+            }
         }
     
     };
