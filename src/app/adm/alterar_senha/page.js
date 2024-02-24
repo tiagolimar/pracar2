@@ -1,8 +1,9 @@
 "use client"
 
-import Link from "next/link"
 import { useRouter } from "next/navigation";
-import bcrypt from 'bcryptjs';
+import Link from "next/link"
+import bcrypt from "bcryptjs";
+import axios from "axios";
 
 import { URL_UPDATE } from "../url.js";
 
@@ -21,14 +22,13 @@ export default function AlterarSenha (){
 				const senha_criptografada = await bcrypt.hash(nova_senha, 10);
 
 				try {
-					const response = await axios.patch(URL_UPDATE, {nome, senha, nova_senha:senha_criptografada })
-					const data = await response.json();
+					const {data} = await axios.patch(URL_UPDATE, {nome, senha, nova_senha:senha_criptografada })
 					
 					if (data.message){
 						alert("O nome informado não existe.")
 					}else{
 						alert("O cadastro foi atualizado com sucesso! Faça o login na página a seguir.")
-						router.push('/adm/login');
+						router.push("/adm/login");
 					}
 				} catch (error) {
 					console.error(error);

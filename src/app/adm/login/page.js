@@ -26,10 +26,9 @@ export default function Login (){
         }
 
         try {
-            const response = await axios.post(URL_LOGIN, { nome, senha })
-            const data = await response.json();
-        
-            if (data.createdAt){
+            const {data} = await axios.post(URL_LOGIN, { nome, senha })
+
+            if (data){
                 const token = data.token;
                 const url = data.url;
     

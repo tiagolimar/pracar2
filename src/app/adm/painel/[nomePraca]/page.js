@@ -31,11 +31,11 @@ export default function PracaPage() {
                 if (authToken === token) {
                     setIsAuthenticated(true);
                 } else {
-                    alert("Essa praça não existe");
+                    alert("Faça o login na próxim tela.");
                     router.push('/adm/login');
                 }
             } else {
-                alert("Essa praça não existe");
+                alert("Faça o login na próxim tela.");
                 router.push('/adm/login');
             }
         };

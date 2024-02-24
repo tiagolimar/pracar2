@@ -21,10 +21,9 @@ export default function Cadastrar() {
 				const senha_criptografada = await bcrypt.hash(senha, 10);
 
 				try {
-					const response = await axios.post(URL_CADASTRO,{ nome, senha:senha_criptografada })
-					const data = await response.json();
+					const data = await axios.post(URL_CADASTRO,{ nome, senha:senha_criptografada })
 			
-					if (data.message){
+					if (data.status!=200){
 						alert("O nome informado já existe.")
 					}else{
 						alert("O cadastro foi realizado com sucesso! Faça o login na página a seguir.")
