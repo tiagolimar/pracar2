@@ -41,7 +41,7 @@ export default function PracaPage() {
         };
 
         checkPraca();
-    }, [url,router]);
+    }, [url, router]);
 
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
@@ -53,9 +53,14 @@ export default function PracaPage() {
         return null;
     }
 
-    return (
-        <div>
-            <h1>Olá, Seja Bem-Vindo à Praça {nomePraca}!</h1>
-        </div>
-    );
+    // return (
+    //     <div className="d-flex flex-column gap-2 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
+    //         <h1>Bem vindo ao painel de gerenciamento!</h1>
+    //         <p className="text-start fs-5 ms-3">
+    //         Logo abaixo edite as informações do evento (essas informações aparecem no cardápio e definem quando eleficará disponível pra todos).</p>
+    //         <p>
+    //         Acesse o menu lateral para utilizar as outras áreas do menu de gerenciamento
+    //         </p>
+    //     </div>
+    // );
 }

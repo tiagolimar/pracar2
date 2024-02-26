@@ -46,7 +46,7 @@ export default function Cadastrar() {
 	};
 
   return (
-	<main className="d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
+	<main className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
 		<h1>Praça R2</h1>
 		<h3 className="text-secondary">Cadastro</h3>
 		<form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
