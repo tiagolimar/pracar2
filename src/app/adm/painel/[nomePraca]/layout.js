@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useParams } from 'next/navigation';
 
+import './layout.css'
+
 function ItensPainel(){
     const { nomePraca } = useParams();
 
@@ -31,8 +33,8 @@ function ItensPainel(){
 
 export default function Layout ({children}){
     return (
-        <>
-            <nav className="navbar shadow border-bottom border-black">
+        <main>
+            <nav className="navbar navbar-painel shadow border-bottom border-black">
                 <div className="container-fluid">
                     <button className="navbar-toggler border-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -49,9 +51,9 @@ export default function Layout ({children}){
                     </div>
                 </div>
             </nav>
-            <main className="d-flex justify-content-center mt-4">
+            <section className="d-flex justify-content-center mt-4">
                 {children}
-            </main>
-        </>
+            </section>
+        </main>
     )
 }

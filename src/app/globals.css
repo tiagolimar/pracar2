@@ -3,9 +3,9 @@ body{
     justify-content: center;
 }
 
-main.container-main{
+.container-main{
     width: 100vw;
-    max-width:600px
+    max-width:600px;
 }
 
 main a{
