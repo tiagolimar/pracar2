@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import axios from "axios";
 
 import { URL_UPDATE } from "../url.js";
+import ContainerMain from "@/components/ContainerMain.jsx";
 
 export default function AlterarSenha (){
 	const router = useRouter();
@@ -47,22 +48,22 @@ export default function AlterarSenha (){
 	};
 
     return(
-    <main className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
-        <h1>Praça R2</h1>
-        <h3 className="text-secondary">Alteração de Senha</h3>
-        <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
-            <input className="form-control" name="nome" placeholder="Nome da praça" 
-				type="text" 
-				required />
-            <input className="form-control" name="senha" placeholder="Senha" type="password" required />
-            <input className="form-control" name="nova_senha" placeholder="Nova senha" type="password" required />
-            <input className="form-control" name="confirm_senha" placeholder="Confirmar nova senha" type="password" required />
-            <button className="btn btn-dark">Alterar Senha</button>
-        </form>
-        <div className="d-flex col-12 justify-content-between">
-            <Link href="/adm">Fazer Login</Link>
-            <Link href="/adm/cadastrar">Cadastrar</Link>
-        </div>
-      </main>
+		<ContainerMain>
+			<h1>Praça R2</h1>
+			<h3 className="text-secondary">Alteração de Senha</h3>
+			<form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
+				<input className="form-control" name="nome" placeholder="Nome da praça" 
+					type="text" 
+					required />
+				<input className="form-control" name="senha" placeholder="Senha" type="password" required />
+				<input className="form-control" name="nova_senha" placeholder="Nova senha" type="password" required />
+				<input className="form-control" name="confirm_senha" placeholder="Confirmar nova senha" type="password" required />
+				<button className="btn btn-dark">Alterar Senha</button>
+			</form>
+			<div className="d-flex col-12 justify-content-between">
+				<Link href="/adm">Fazer Login</Link>
+				<Link href="/adm/cadastrar">Cadastrar</Link>
+			</div>
+		</ContainerMain>
     )
 }

@@ -46,7 +46,7 @@ export default function Cadastrar() {
 	};
 
   return (
-	<main className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
+	<section className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
 		<h1>Praça R2</h1>
 		<h3 className="text-secondary">Cadastro</h3>
 		<form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
@@ -59,6 +59,6 @@ export default function Cadastrar() {
 			<Link href="/adm">Fazer Login</Link>
 			<Link href="/adm/alterar_senha">Alterar Senha</Link>
 		</div>
-	</main>
+	</section>
   );
 }

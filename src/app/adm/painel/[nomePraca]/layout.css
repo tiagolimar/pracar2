@@ -1,8 +1,4 @@
-.navbar-painel{
-    width: 100vw;
-}
-
-@media (max-width:376px){
+@media (max-width:396px){
     .offcanvas-start{
         max-width: 250px;
     }

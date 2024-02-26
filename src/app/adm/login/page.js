@@ -34,8 +34,6 @@ export default function Login (){
     
                 setCookie('auth_token_pracar2', token, 7);
     
-                alert("O login foi realizado com sucesso! Você será redirecionado ao sistema de gerenciamento.");
-    
                 router.push(`/adm/painel/${url}`);
             }else{
                 alert("Nome ou senha não conferem")
@@ -52,7 +50,7 @@ export default function Login (){
     };
     
     return(
-    <main className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
+    <section className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
         <h1>Praça R2</h1>
         <h3 className="text-secondary">Login</h3>
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
@@ -64,6 +62,6 @@ export default function Login (){
             <Link href="/adm/alterar_senha">Alterar senha</Link>
             <Link href="/adm/cadastrar">Cadastrar</Link>
         </div>
-      </main>
+      </section>
     )
 }

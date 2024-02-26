@@ -34,7 +34,7 @@ function ItensPainel(){
 export default function Layout ({children}){
     return (
         <main>
-            <nav className="navbar navbar-painel shadow border-bottom border-black">
+            <nav className="navbar navbar-painel shadow border-bottom border-black ">
                 <div className="container-fluid">
                     <button className="navbar-toggler border-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
