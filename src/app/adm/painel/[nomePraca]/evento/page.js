@@ -74,9 +74,9 @@ export default function DadosEvento (){
 
     return(
     <ContainerMain>
-        <h1>{"Nome da Praça"}</h1>
+        <h1>{"Nome Da Praça"}</h1>
         <h3 className="text-secondary">Dados do Evento</h3>
-        <p>Explicação sobre os dados do evento</p>
+        {/* <p>Explicação sobre os dados do evento</p> */}
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
             <label className="text-start">
                 Nome do Evento:

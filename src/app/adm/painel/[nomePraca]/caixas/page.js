@@ -6,10 +6,12 @@ import bcrypt from "bcryptjs";
 import axios from "axios";
 
 import { URL_UPDATE } from "../url.js";
+import ContainerMain from "@/components/ContainerMain.jsx";
 
 export default function Caixas (){
 	const router = useRouter();
-	
+	q
+    
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const senha = e.target.elements.senha.value;
@@ -44,7 +46,7 @@ export default function Caixas (){
 	};
 
     return(
-    <main className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
+    <ContainerMain>
         <h1>{"Nome da Praça"}</h1>
         <h3 className="text-secondary">Acesso aos Caixas</h3>
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
@@ -57,6 +59,6 @@ export default function Caixas (){
         <h4 className="mt-4">Acesse os Caixas através do link abaixo: </h4>
         <Link className="fs-5" href="/caixa/cadastrar">{"https://pracar2.vercel.app/caixa/minhaPraca"}</Link>
 
-      </main>
+      </ContainerMain>
     )
 }

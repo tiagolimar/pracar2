@@ -1,9 +1,13 @@
 "use client"
 
 import Link from "next/link";
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
+import { URL_CHECK } from '../../url';
 import './layout.css'
+
 
 function ItensPainel(){
     const { nomePraca } = useParams();
@@ -31,7 +35,55 @@ function ItensPainel(){
     );
 }
 
+function title(str) {
+    return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
+
 export default function Layout ({children}){
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [nomeDaPraca, setNomeDaPraca] = useState('');
+
+    const router = useRouter();
+    const {nomePraca} = useParams();
+
+    const url = nomePraca;
+
+    useEffect(() => {
+        const checkPraca = async () => {
+            if (!url) return;
+
+            const dados = await axios.post(URL_CHECK, { url });
+
+            if (dados.data?.exists) {
+                const token = dados.data.token;
+                setNomeDaPraca(title(dados.data.nome));
+                const authToken = getCookie('auth_token_pracar2');
+
+                if (authToken === token) {
+                    setIsAuthenticated(true);
+                } else {
+                    alert("Faça o login na próxim tela.");
+                    router.push('/adm/login');
+                }
+            } else {
+                alert("Faça o login na próxim tela.");
+                router.push('/adm/login');
+            }
+        };
+
+        checkPraca();
+    }, [url, router]);
+
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length ===  2) return parts.pop().split(';').shift();
+    };
+
+    if (!isAuthenticated) {
+        return null;
+    }
+
     return (
         <main>
             <nav className="navbar navbar-painel shadow border-bottom border-black ">
@@ -39,7 +91,7 @@ export default function Layout ({children}){
                     <button className="navbar-toggler border-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>
-                    <a className="navbar-brand fw-bold" href="#">Praça R2 - Nome da Praça</a>
+                    <a className="navbar-brand fw-bold" href="#">{`Praça R2 - ${nomeDaPraca}`}</a>
                     <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="label">
                         <div className="offcanvas-header shadow-sm bg-dark text-light">
                             <h5 className="offcanvas-title" id="label">Menu</h5>
