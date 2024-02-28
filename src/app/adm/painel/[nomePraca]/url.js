@@ -1,1 +1,1 @@
-import { URL_BASE } from '../../../url_base_api';
+import { URL_BASE } from '../../../../components/url/urls';

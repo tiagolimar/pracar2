@@ -4,6 +4,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
+import ContainerMain from "@/components/ContainerMain.jsx";
+import WakeUpServer from "@/components/WakeUpServer.jsx";
 import { URL_LOGIN } from '../url';
 
 function setCookie(name, value, days) {
@@ -50,18 +52,19 @@ export default function Login (){
     };
     
     return(
-    <section className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
-        <h1>Praça R2</h1>
-        <h3 className="text-secondary">Login</h3>
-        <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
-            <input className="form-control" name="nome" placeholder="Nome da praça" type="text" required />
-            <input className="form-control" name="senha" placeholder="Senha" type="password" required />
-            <button className="btn btn-dark"> Fazer Login</button>
-        </form>
-        <div className="d-flex col-12 justify-content-between">
-            <Link href="/adm/alterar_senha">Alterar senha</Link>
-            <Link href="/adm/cadastrar">Cadastrar</Link>
-        </div>
-      </section>
+        <ContainerMain>
+            <h1>Praça R2</h1>
+            <h3 className="text-secondary">Login</h3>
+            <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
+                <input className="form-control" name="nome" placeholder="Nome da praça" type="text" required />
+                <input className="form-control" name="senha" placeholder="Senha" type="password" required />
+                <button className="btn btn-dark"> Fazer Login</button>
+            </form>
+            <div className="d-flex col-12 justify-content-between">
+                <Link href="/adm/alterar_senha">Alterar senha</Link>
+                <Link href="/adm/cadastrar">Cadastrar</Link>
+            </div>
+            <WakeUpServer />
+        </ContainerMain>
     )
 }

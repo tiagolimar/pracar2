@@ -2,6 +2,9 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+import ContainerMain from '@/components/ContainerMain.jsx';
 import { URL_CHECK } from '../../url.js';
 
 export default function PracaPage() {
@@ -16,16 +19,10 @@ export default function PracaPage() {
         const checkPraca = async () => {
             if (!url) return;
 
-            const response = await fetch(URL_CHECK, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url })
-            });
+            const dados = await axios.post(URL_CHECK, { url })
 
-            const dados = await response.json();
-
-            if (dados?.exists) {
-                const token = dados.token;
+            if (dados.data?.exists) {
+                const token = dados.data.token;
                 const authToken = getCookie('auth_token_pracar2');
 
                 if (authToken === token) {
@@ -54,13 +51,13 @@ export default function PracaPage() {
     }
 
     return (
-        <div className="container-main d-flex flex-column gap-2 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
+        <ContainerMain >
             <h1 className='mb-4'>Bem vindo ao painel de gerenciamento!</h1>
             <p className="text-start fs-5 ms-3">
             Logo abaixo edite as informações do evento (essas informações aparecem no cardápio e definem quando eleficará disponível pra todos).</p>
             <p className="text-start fs-5 ms-3">
             Acesse o menu lateral para utilizar as outras áreas do menu de gerenciamento
             </p>
-        </div>
+        </ContainerMain>
     );
 }

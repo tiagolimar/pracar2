@@ -1,3 +1,5 @@
+import './style.css';
+
 export default function ContainerMain({children}){
     return(
         <main className="d-flex justify-content-center">

@@ -1,5 +1,6 @@
 "use client"
 
+import ContainerMain from "@/components/ContainerMain.jsx";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
@@ -8,14 +9,25 @@ import { useState } from 'react';
 
 // import { URL_UPDATE } from "../url.js";
 
+const format = n => `${n}`.padStart(2,"0");
+
+function getDate(){
+    const today = new Date();
+    const day = format(today.getDate());
+    const month = format(+today.getMonth()+1);
+    const year = today.getFullYear();
+    return `${year}-${month}-${day}`
+}
+
 export default function DadosEvento (){
+    const today = getDate();
     const [eventData, setEventData] = useState({
         eventName: '',
         eventLocation: '',
-        startDate: '',
-        endDate: '',
-        startTime: '',
-        endTime: '',
+        startDate: today,
+        endDate: today,
+        startTime: '19:00',
+        endTime: '21:15',
       });
     
       const handleChange = (e) => {
@@ -61,37 +73,37 @@ export default function DadosEvento (){
 	};
 
     return(
-    <main className="container-main d-flex flex-column gap-3 m-4 p-4 justify-content-center align-items-center border border-black rounded shadow text-center">
+    <ContainerMain>
         <h1>{"Nome da Praça"}</h1>
         <h3 className="text-secondary">Dados do Evento</h3>
         <p>Explicação sobre os dados do evento</p>
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
             <label className="text-start">
                 Nome do Evento:
-                <input className="form-control" type="text" name="eventName" value={eventData.eventName} onChange={handleChange} required />
+                <input className="form-control" type="text" name="eventName" value={eventData.eventName} onChange={handleChange} placeholder="Grupo de Oração PFN" required />
             </label>
             <label className="text-start">
                 Local do Evento:
-                <input className="form-control" type="text" name="eventLocation" value={eventData.eventLocation} onChange={handleChange} required />
+                <input className="form-control" type="text" name="eventLocation" value={eventData.eventLocation} onChange={handleChange} placeholder="Sede da Vocação de Jesus" required />
             </label>
             <label className="text-start">
                 Data de Início:
-                <input className="form-control" type="date" name="startDate" value={eventData.startDate} onChange={handleChange} required />
+                <input className="form-control" type="date" name="startDate" value={eventData.startDate} onChange={handleChange} />
             </label>
             <label className="text-start">
                 Data de Término:
-                <input className="form-control" type="date" name="endDate" value={eventData.endDate} onChange={handleChange} required />
+                <input className="form-control" type="date" name="endDate" value={eventData.endDate} onChange={handleChange} />
             </label>
             <label className="text-start">
                 Hora de Início:
-                <input className="form-control" type="time" name="startTime" value={eventData.startTime} onChange={handleChange} required />
+                <input className="form-control" type="time" name="startTime" value={eventData.startTime} onChange={handleChange} />
             </label>
             <label className="text-start">
                 Hora de Término:
-                <input className="form-control" type="time" name="endTime" value={eventData.endTime} onChange={handleChange} required />
+                <input className="form-control" type="time" name="endTime" value={eventData.endTime} onChange={handleChange} />
             </label>
             <button className="btn btn-dark">Salvar</button>
         </form>
-      </main>
+      </ContainerMain>
     )
 }

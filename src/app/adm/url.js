@@ -1,4 +1,4 @@
-import { URL_BASE } from '../url_base_api';
+import { URL_BASE } from '../../components/url/urls';
 
 export const URL_CADASTRO = `${URL_BASE}/praca/cadastrar`;
 export const URL_LOGIN = `${URL_BASE}/praca/login`;

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import "./style.css"
 import ContainerMain from "@/components/ContainerMain";
 
 export default function Home() {
