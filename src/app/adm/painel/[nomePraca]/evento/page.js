@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 
 import ContainerMain from "@/components/ContainerMain.jsx";
 import { getDate } from "@/components/adm/painel/evento"
-import { nomeDaPracaContext } from "@/contexts/nomeDaPracaContext";
+import { dadosPracaContext } from "@/contexts/dadosPracaContext";
 
 export default function DadosEvento (){
     const today = getDate();
@@ -18,7 +18,7 @@ export default function DadosEvento (){
         endTime: "21:00",
     });
 
-    const { nomeDaPraca } = useContext(nomeDaPracaContext)
+    const { nome } = useContext(dadosPracaContext)
     
     const handleChange = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value, });
@@ -64,7 +64,7 @@ export default function DadosEvento (){
 
     return(
     <ContainerMain>
-        <h1>{nomeDaPraca}</h1>
+        <h1>{nome}</h1>
         <h3 className="text-secondary">Dados do Evento</h3>
         {/* <p>Explicação sobre os dados do evento</p> */}
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">

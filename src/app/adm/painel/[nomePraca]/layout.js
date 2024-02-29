@@ -6,13 +6,13 @@ import axios from 'axios';
 
 import { ItensPainel, getCookie, title } from "@/components/adm/painel";
 import { URL_CHECK } from '@/components/URLs';
-import { nomeDaPracaContext } from '@/contexts/nomeDaPracaContext';
+import { dadosPracaContext } from '@/contexts/dadosPracaContext';
 
 import './layout.css'
 
 export default function Layout ({children}){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [nomeDaPraca, setNomeDaPraca] = useState('');
+    const [dadosPraca, setDadosPraca] = useState({});
 
     const {nomePraca} = useParams();
     const url = nomePraca;
@@ -27,7 +27,10 @@ export default function Layout ({children}){
 
             if (dados.data?.exists) {
                 const token = dados.data.token;
-                setNomeDaPraca(title(dados.data.nome));
+                const {nome, senha_caixa, url} = dados.data;
+
+                setDadosPraca({nome:title(nome),senha_caixa, url});
+
                 const authToken = getCookie('auth_token_pracar2');
 
                 if (authToken === token) {
@@ -56,7 +59,7 @@ export default function Layout ({children}){
                     <button className="navbar-toggler border-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>
-                    <a className="navbar-brand fw-bold" href="#">{`Praça R2 - ${nomeDaPraca}`}</a>
+                    <a className="navbar-brand fw-bold" href="#">{`Praça R2 - ${dadosPraca.nome}`}</a>
                     <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="label">
                         <div className="offcanvas-header shadow-sm bg-dark text-light">
                             <h5 className="offcanvas-title" id="label">Menu</h5>
@@ -69,9 +72,9 @@ export default function Layout ({children}){
                 </div>
             </nav>
             <section className="d-flex justify-content-center mt-4">
-                <nomeDaPracaContext.Provider value={{nomeDaPraca}} >
+                <dadosPracaContext.Provider value={{...dadosPraca}} >
                     {children}
-                </nomeDaPracaContext.Provider>
+                </dadosPracaContext.Provider>
             </section>
         </main>
     )

@@ -3,10 +3,10 @@
 import { useContext } from "react";
 
 import ContainerMain from "@/components/ContainerMain.jsx";
-import { nomeDaPracaContext } from "@/contexts/nomeDaPracaContext";
+import { dadosPracaContext } from "@/contexts/dadosPracaContext";
 
 export default function PracaPage() {
-    const { nomeDaPraca } = useContext(nomeDaPracaContext);
+    const { nomeDaPraca } = useContext(dadosPracaContext);
     return (
         <ContainerMain >
             <h1 className="fs-2">{nomeDaPraca}</h1>
