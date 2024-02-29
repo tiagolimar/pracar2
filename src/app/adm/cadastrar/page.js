@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import bcrypt from 'bcryptjs';
 import axios from 'axios';
 
-import { URL_CADASTRO } from './../url';
+import { URL_CADASTRO } from '@/components/URLs';
 import ContainerMain from '@/components/ContainerMain.jsx';
 
 export default function Cadastrar() {

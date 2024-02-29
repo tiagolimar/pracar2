@@ -2,15 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link"
-import bcrypt from "bcryptjs";
-import axios from "axios";
 
-import { URL_UPDATE } from "../url.js";
 import ContainerMain from "@/components/ContainerMain.jsx";
 
 export default function Caixas (){
 	const router = useRouter();
-	q
     
 	const handleSubmit = async (e) => {
 		e.preventDefault();

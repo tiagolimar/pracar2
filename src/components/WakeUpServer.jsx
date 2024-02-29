@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { URL } from "@/components/url/urls.js";
+import { URL } from "@/components/URLs";
 
 export default function WakeUpServer() {
     const [isLoading, setIsLoading] = useState(true);

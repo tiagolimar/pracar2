@@ -1,52 +1,23 @@
 "use client"
 
-import Link from "next/link";
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { URL_CHECK } from '../../url';
+import { ItensPainel, getCookie, title } from "@/components/adm/painel";
+import { URL_CHECK } from '@/components/URLs';
+import { nomeDaPracaContext } from '@/contexts/nomeDaPracaContext';
+
 import './layout.css'
-
-
-function ItensPainel(){
-    const { nomePraca } = useParams();
-
-    const RotasPainel = [
-        { nome:"Home", rota:`/adm/painel/${nomePraca}` },
-        { nome:"Dados do Evento", rota:`/adm/painel/${nomePraca}/evento` },
-        { nome:"Cardápio", rota:`/adm/painel/${nomePraca}/cardapio` },
-        { nome:"Caixas", rota:`/adm/painel/${nomePraca}/caixas` },
-        { nome:"Relatórios", rota:`/adm/painel/${nomePraca}/relatorios` },
-    ]
-
-    return (
-        <ul className="navbar-nav gap-3">
-            {RotasPainel.map((r, id) => {
-                return (
-                    <li key={id} className="nav-item shadow-sm">
-                        <Link className="btn btn-lg btn-outline-dark w-100" href={r.rota}>
-                            {r.nome}
-                        </Link>
-                    </li>
-                );
-            })}
-        </ul>
-    );
-}
-
-function title(str) {
-    return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-}
 
 export default function Layout ({children}){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [nomeDaPraca, setNomeDaPraca] = useState('');
 
-    const router = useRouter();
     const {nomePraca} = useParams();
-
     const url = nomePraca;
+
+    const router = useRouter();
 
     useEffect(() => {
         const checkPraca = async () => {
@@ -62,23 +33,17 @@ export default function Layout ({children}){
                 if (authToken === token) {
                     setIsAuthenticated(true);
                 } else {
-                    alert("Faça o login na próxim tela.");
+                    console.log("É necessário atualizar sua autorização, faça login.");
                     router.push('/adm/login');
                 }
             } else {
-                alert("Faça o login na próxim tela.");
+                console.log("É necessário atualizar sua autorização, faça login.");
                 router.push('/adm/login');
             }
         };
 
         checkPraca();
     }, [url, router]);
-
-    const getCookie = (name) => {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length ===  2) return parts.pop().split(';').shift();
-    };
 
     if (!isAuthenticated) {
         return null;
@@ -104,7 +69,9 @@ export default function Layout ({children}){
                 </div>
             </nav>
             <section className="d-flex justify-content-center mt-4">
-                {children}
+                <nomeDaPracaContext.Provider value={{nomeDaPraca}} >
+                    {children}
+                </nomeDaPracaContext.Provider>
             </section>
         </main>
     )

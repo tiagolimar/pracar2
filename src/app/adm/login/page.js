@@ -4,9 +4,9 @@ import Link from "next/link"
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-import ContainerMain from "@/components/ContainerMain.jsx";
-import WakeUpServer from "@/components/WakeUpServer.jsx";
-import { URL_LOGIN } from '../url';
+import ContainerMain from "@/components/ContainerMain";
+import WakeUpServer from "@/components/WakeUpServer";
+import { URL_LOGIN } from '@/components/URLs';
 
 function setCookie(name, value, days) {
     const expires = new Date();

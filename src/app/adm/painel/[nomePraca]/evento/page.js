@@ -1,38 +1,28 @@
 "use client"
 
-import ContainerMain from "@/components/ContainerMain.jsx";
-import Link from "next/link"
 import { useRouter } from "next/navigation";
-import { useState } from 'react';
-// import bcrypt from "bcryptjs";
-// import axios from "axios";
+import { useContext, useState } from "react";
 
-// import { URL_UPDATE } from "../url.js";
-
-const format = n => `${n}`.padStart(2,"0");
-
-function getDate(){
-    const today = new Date();
-    const day = format(today.getDate());
-    const month = format(+today.getMonth()+1);
-    const year = today.getFullYear();
-    return `${year}-${month}-${day}`
-}
+import ContainerMain from "@/components/ContainerMain.jsx";
+import { getDate } from "@/components/adm/painel/evento"
+import { nomeDaPracaContext } from "@/contexts/nomeDaPracaContext";
 
 export default function DadosEvento (){
     const today = getDate();
     const [eventData, setEventData] = useState({
-        eventName: '',
-        eventLocation: '',
+        eventName: "",
+        eventLocation: "",
         startDate: today,
         endDate: today,
-        startTime: '19:00',
-        endTime: '21:15',
-      });
+        startTime: "18:00",
+        endTime: "21:00",
+    });
+
+    const { nomeDaPraca } = useContext(nomeDaPracaContext)
     
-      const handleChange = (e) => {
-        setEventData({ ...eventData, [e.target.name]: e.target.value, });
-      };
+    const handleChange = (e) => {
+    setEventData({ ...eventData, [e.target.name]: e.target.value, });
+    };
 
 	const router = useRouter();
 	
@@ -74,7 +64,7 @@ export default function DadosEvento (){
 
     return(
     <ContainerMain>
-        <h1>{"Nome Da Praça"}</h1>
+        <h1>{nomeDaPraca}</h1>
         <h3 className="text-secondary">Dados do Evento</h3>
         {/* <p>Explicação sobre os dados do evento</p> */}
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
