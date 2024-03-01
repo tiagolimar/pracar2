@@ -6,10 +6,10 @@ import Link from "next/link"
 import ContainerMain from "@/components/ContainerMain";
 import { dadosPracaContext } from "@/contexts/dadosPracaContext";
 import { gerarSenhaCaixa } from "@/components/adm/painel/caixas/index.js";
-
+import { URL_UPDATE_SENHA_CAIXA } from "@/components/URLs/index.js";
 
 export default function Caixas (){
-    const { nome, url, senha_caixa } = useContext(dadosPracaContext);
+    const { id, nome, url, senha_caixa } = useContext(dadosPracaContext);
     const [senha, setSenha] = useState(senha_caixa);
 
 	const handleSubmit = async (e) => {
@@ -18,12 +18,12 @@ export default function Caixas (){
 		if (senha != senha_caixa){
             if (senha){
                 try {
-                    const {data} = await axios.patch(URL_UPDATE_SENHA_CAIXA, {nome, senha, nova_senha:senha_criptografada })
+                    const {data} = await axios.patch(URL_UPDATE_SENHA_CAIXA, {id, senha})
                     
                     if (data.message){
-                        alert("O nome informado não existe.")
+                        alert("Não foi possível salvar a senha.")
                     }else{
-                        alert("O cadastro foi atualizado com sucesso! Faça o login na página a seguir.")
+                        alert("Senha salva com sucesso.")
                     }
                 } catch (error) {
                     const message = error.response.data?.message;
@@ -35,7 +35,7 @@ export default function Caixas (){
                 }
             }
         }else{
-            alert("Senha salva!")
+            alert("Senha salva com sucesso.")
         }
 	};
 

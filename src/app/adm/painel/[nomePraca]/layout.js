@@ -27,9 +27,9 @@ export default function Layout ({children}){
 
             if (dados.data?.exists) {
                 const token = dados.data.token;
-                const {nome, senha_caixa, url} = dados.data;
+                const {id, nome, senha_caixa, url} = dados.data;
 
-                setDadosPraca({nome:title(nome),senha_caixa, url});
+                setDadosPraca({id, nome:title(nome),senha_caixa, url});
 
                 const authToken = getCookie('auth_token_pracar2');
 
