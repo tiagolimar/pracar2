@@ -22,25 +22,30 @@ export default function Layout ({children}){
     useEffect(() => {
         const checkPraca = async () => {
             if (!url) return;
+            
+            try {
+                const dados = await axios.post(URL_CHECK, { url });
 
-            const dados = await axios.post(URL_CHECK, { url });
-
-            if (dados.data?.exists) {
-                const token = dados.data.token;
-                const {id, nome, senha_caixa, url} = dados.data;
-
-                setDadosPraca({id, nome:title(nome),senha_caixa, url});
-
-                const authToken = getCookie('auth_token_pracar2');
-
-                if (authToken === token) {
-                    setIsAuthenticated(true);
-                } else {
-                    console.log("É necessário atualizar sua autorização, faça login.");
+                if (dados){
+                    const token = dados.data.token;
+                    const {id, nome, senha_caixa, url} = dados.data;
+                    
+                    setDadosPraca({id, nome:title(nome),senha_caixa, url});
+                    
+                    const authToken = getCookie('auth_token_pracar2');
+    
+                    if (authToken === token) {
+                        setIsAuthenticated(true);
+                    } else {
+                        console.log("É necessário atualizar sua autorização, faça login.");
+                        router.push('/adm/login');
+                    }
+                }else{
                     router.push('/adm/login');
                 }
-            } else {
-                console.log("É necessário atualizar sua autorização, faça login.");
+
+            } catch (error) {
+                alert(error.response.data.message);
                 router.push('/adm/login');
             }
         };

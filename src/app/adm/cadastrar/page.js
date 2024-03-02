@@ -23,7 +23,6 @@ export default function Cadastrar() {
 
 				try {
 					const data = await axios.post(URL_CADASTRO,{ nome, senha:senha_criptografada });
-			
 					if (data.status!=200){
 						alert("O nome informado já existe.");
 					}else{

@@ -1,23 +1,58 @@
 "use client"
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import axios from "axios";
 
 import ContainerMain from "@/components/ContainerMain";
 import { dadosPracaContext } from "@/contexts/dadosPracaContext.jsx";
+import { URL_PAGAMENTOS } from "@/components/URLs/index.js";
 
 export default function Pagamentos(){
-    const { id, nome } = useContext(dadosPracaContext);
+    const { id } = useContext(dadosPracaContext);
 
     const [formData, setFormData] = useState({
+        id,
         nomePixA: '',
         nomePixB: '',
         chavePixA: '',
-        chavePixB: ''
-    });
+        chavePixB: '',
+    }); 
+
+    useEffect(() => {
+        const fetchFormData = async () => {
+            try {
+                const response = await axios.get(`${URL_PAGAMENTOS}/${id}`);
+                const { chavePixA, nomePixA, chavePixB, nomePixB } = response.data;
+                const data = { id, chavePixA, nomePixA, chavePixB, nomePixB }
+                Object.entries(data).map(([chave,valor])=>{
+                    if (valor) setFormData({ ...formData , [`${chave}`]:valor });
+                })
+            } catch (error) {
+                console.error("Erro ao buscar dados:", error);
+            }
+        };
+
+        fetchFormData();
+    }, [id])
 
     async function handleSubmit (e){
-        e.preventDefault();
-        return null;
+		e.preventDefault();
+		try {
+			const {data} = await axios.patch(URL_PAGAMENTOS, { ...formData });
+            
+			if (data.message){
+				alert("Não foi possível atualizar os dados.");
+			}else{
+				alert("Os dados foram atualizados com sucesso.");
+			}
+		} catch (error) {
+            const message = error.response.data?.message;
+            if(message){
+                alert(message);
+            }else{
+                console.error(error);
+            }
+		}
     }
 
     const handleChange = (e) => {
