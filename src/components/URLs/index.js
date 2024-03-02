@@ -9,4 +9,4 @@ export const URL_UPDATE = `${URL_BASE}/praca/update`;
 
 export const URL_CHECK = `${URL_BASE}/praca/check`;
 
-export const URL_UPDATE_SENHA_CAIXA = `${URL_BASE}/praca/caixa/update`;
+export const URL_UPDATE_SENHA_CAIXA = `${URL_BASE}/praca/caixa`;

@@ -18,6 +18,8 @@ export function ItensPainel(){
         { nome:"Dados do Evento", rota:`/adm/painel/${nomePraca}/evento` },
         { nome:"Cardápio", rota:`/adm/painel/${nomePraca}/cardapio` },
         { nome:"Caixas", rota:`/adm/painel/${nomePraca}/caixas` },
+        { nome:"Pagamentos", rota:`/adm/painel/${nomePraca}/pagamentos` },
+        {},
         { nome:"Relatórios", rota:`/adm/painel/${nomePraca}/relatorios` },
     ]
 
@@ -25,11 +27,12 @@ export function ItensPainel(){
         <ul className="navbar-nav gap-3">
             {RotasPainel.map((r, id) => {
                 return (
+                    r.nome && 
                     <li key={id} className="nav-item shadow-sm">
                         <Link className="btn btn-lg btn-outline-dark w-100" href={r.rota}>
                             {r.nome}
                         </Link>
-                    </li>
+                    </li> || <hr key={id} />
                 );
             })}
         </ul>

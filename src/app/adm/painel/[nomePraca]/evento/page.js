@@ -10,15 +10,15 @@ import { dadosPracaContext } from "@/contexts/dadosPracaContext";
 export default function DadosEvento (){
     const today = getDate();
     const [eventData, setEventData] = useState({
-        eventName: "",
-        eventLocation: "",
-        startDate: today,
-        endDate: today,
-        startTime: "18:00",
-        endTime: "21:00",
+        nome: "",
+        local: "",
+        dataInicio: today,
+        dataTermino: today,
+        horaInicio: "18:00",
+        horaTermino: "21:00",
     });
 
-    const { nome } = useContext(dadosPracaContext)
+    const { id } = useContext(dadosPracaContext);
     
     const handleChange = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value, });
@@ -28,10 +28,8 @@ export default function DadosEvento (){
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const nome = e.target.elements.nome.value.toUpperCase();
-		const senha = e.target.elements.senha.value;
-		const nova_senha = e.target.elements.nova_senha.value;
-		const confirm_senha = e.target.elements.confirm_senha.value;
+		const {nome, senha, nova_senha, confirm_senha} = eventData;
+        const nome_upper = nome.toUpperCase();
 
 		// if (nome && senha && nova_senha && confirm_senha){
 		// 	if (nova_senha == confirm_senha){
@@ -64,33 +62,32 @@ export default function DadosEvento (){
 
     return(
     <ContainerMain>
-        <h1>{nome}</h1>
-        <h3 className="text-secondary">Dados do Evento</h3>
-        {/* <p>Explicação sobre os dados do evento</p> */}
+        <h1>Dados do Evento</h1>
+        <p className="text-secondary fs-5">Preencha os dados do evento. Essas informações ficam visíveis para os usuários através do cardápio online.</p>
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
             <label className="text-start">
                 Nome do Evento:
-                <input className="form-control" type="text" name="eventName" value={eventData.eventName} onChange={handleChange} placeholder="Grupo de Oração PFN" required />
+                <input className="form-control border-black" type="text" name="eventName" value={eventData.nome} onChange={handleChange} placeholder="Nome do Evento" required />
             </label>
             <label className="text-start">
                 Local do Evento:
-                <input className="form-control" type="text" name="eventLocation" value={eventData.eventLocation} onChange={handleChange} placeholder="Sede da Vocação de Jesus" required />
+                <input className="form-control border-black" type="text" name="eventLocation" value={eventData.local} onChange={handleChange} placeholder="Local do Evento" required />
             </label>
             <label className="text-start">
                 Data de Início:
-                <input className="form-control" type="date" name="startDate" value={eventData.startDate} onChange={handleChange} />
+                <input className="form-control border-black" type="date" name="startDate" value={eventData.dataInicio} onChange={handleChange} />
             </label>
             <label className="text-start">
                 Data de Término:
-                <input className="form-control" type="date" name="endDate" value={eventData.endDate} onChange={handleChange} />
+                <input className="form-control border-black" type="date" name="endDate" value={eventData.dataTermino} onChange={handleChange} />
             </label>
             <label className="text-start">
                 Hora de Início:
-                <input className="form-control" type="time" name="startTime" value={eventData.startTime} onChange={handleChange} />
+                <input className="form-control border-black" type="time" name="startTime" value={eventData.horaInicio} onChange={handleChange} />
             </label>
             <label className="text-start">
                 Hora de Término:
-                <input className="form-control" type="time" name="endTime" value={eventData.endTime} onChange={handleChange} />
+                <input className="form-control border-black" type="time" name="endTime" value={eventData.horaTermino} onChange={handleChange} />
             </label>
             <button className="btn btn-dark">Salvar</button>
         </form>

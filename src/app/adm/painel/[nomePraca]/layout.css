@@ -1,5 +1,13 @@
-@media (max-width:396px){
-    .offcanvas-start{
+@media (max-width: 396px) {
+    .offcanvas-start {
         max-width: 250px;
     }
+}
+
+.navbar-painel{
+    background-color: white;
+}
+
+.layout-painel {
+    padding-top:50px;
 }
