@@ -1,4 +1,4 @@
-@media (max-width: 396px) {
+@media (max-width: 456px) {
     .offcanvas-start {
         max-width: 250px;
     }
@@ -10,4 +10,8 @@
 
 .layout-painel {
     padding-top:50px;
+}
+
+a.navbar-brand.text-truncate{
+    max-width: calc( 100% - 80px );
 }

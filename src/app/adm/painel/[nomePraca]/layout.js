@@ -64,9 +64,9 @@ export default function Layout ({children}){
                     <button className="navbar-toggler border-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>
-                    <a className="navbar-brand fw-bold" href="#">{`Praça R2 - ${dadosPraca.nome}`}</a>
+                    <a className="navbar-brand fw-bold text-truncate" href="#">{`Praça R2 - ${dadosPraca.nome}`}</a>
                     <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="label">
-                        <div className="offcanvas-header shadow-sm bg-dark text-light">
+                        <div className="offcanvas-header shadow-sm bg-dark text-light" data-bs-theme="dark">
                             <h5 className="offcanvas-title" id="label">Menu</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>

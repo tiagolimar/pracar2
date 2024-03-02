@@ -26,12 +26,10 @@ export default function Caixas (){
                         alert("Senha salva com sucesso.")
                     }
                 } catch (error) {
-                    console.log(error);
                     const message = error.response.data?.message;
                     if(message){
                         alert(message);
                     }else{
-                        console.log(data)
                         console.error(error);
                     }
                 }

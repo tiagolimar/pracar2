@@ -23,10 +23,7 @@ export default function Pagamentos(){
             try {
                 const response = await axios.get(`${URL_PAGAMENTOS}/${id}`);
                 const { chavePixA, nomePixA, chavePixB, nomePixB } = response.data;
-                const data = { id, chavePixA, nomePixA, chavePixB, nomePixB }
-                Object.entries(data).map(([chave,valor])=>{
-                    if (valor) setFormData({ ...formData , [`${chave}`]:valor });
-                })
+                setFormData({ id, chavePixA, nomePixA, chavePixB, nomePixB });
             } catch (error) {
                 console.error("Erro ao buscar dados:", error);
             }

@@ -9,7 +9,6 @@ export default function WakeUpServer() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(URL);
-                console.log(response.data);
             } catch (error) {
                 console.error("Erro ao buscar dados:", error);
             } finally {

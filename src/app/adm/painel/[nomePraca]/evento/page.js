@@ -9,7 +9,9 @@ import { dadosPracaContext } from "@/contexts/dadosPracaContext";
 import { URL_EVENTO } from '@/components/URLs/index';
 
 export default function DadosEvento (){
-    const { id } = useContext(dadosPracaContext);
+    const router = useRouter();
+
+    const { id, url } = useContext(dadosPracaContext);
 
     const [formData, setFormData] = useState({
         id,
@@ -26,8 +28,8 @@ export default function DadosEvento (){
             try {
                 const response = await axios.get(`${URL_EVENTO}/${id}`);
                 let {nome, local, dataInicio, dataTermino, horaInicio, horaTermino } = response.data;
-                dataInicio = dataInicio.substring(0,10);
-                dataTermino = dataTermino.substring(0,10);
+                dataInicio = dataInicio?.substring(0,10);
+                dataTermino = dataTermino?.substring(0,10);
                 setFormData({ id, nome, local, dataInicio, dataTermino, horaInicio, horaTermino });
             } catch (error) {
                 console.error("Erro ao buscar dados:", error);
@@ -41,8 +43,6 @@ export default function DadosEvento (){
         const { name, value } = e.target;
         setFormData(prevState => ({ ...prevState, [name]: value }));
     };
-
-	const router = useRouter();
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -53,10 +53,11 @@ export default function DadosEvento (){
 				alert("Não foi possível atualizar os dados.");
 			}else{
 				alert("Os dados foram atualizados com sucesso.");
+                router.push(`/adm/painel/${url}`);
 			}
 		} catch (error) {
-            const message = error.response.data?.message;
-            if(message){
+            if(error.response){
+                const message = error.response.data?.message;
                 alert(message);
             }else{
                 console.error(error);
