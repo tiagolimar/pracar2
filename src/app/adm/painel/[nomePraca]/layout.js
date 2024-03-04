@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { ItensPainel, getCookie, title } from "@/components/adm/painel";
-import { URL_CHECK } from '@/components/URLs';
+import { URL_CHECK, URL_EVENTO, URL_PAGAMENTOS } from '@/components/URLs';
 import { dadosPracaContext } from '@/contexts/dadosPracaContext';
 
 import './layout.css';
@@ -13,6 +13,8 @@ import './layout.css';
 export default function Layout ({children}){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [dadosPraca, setDadosPraca] = useState({});
+    const [dadosEvento, setDadosEvento] = useState({});
+    const [dadosPagamentos, setDadosPagamentos] = useState({});
 
     const {nomePraca} = useParams();
     const url = nomePraca;
@@ -35,6 +37,14 @@ export default function Layout ({children}){
                     const authToken = getCookie('auth_token_pracar2');
     
                     if (authToken === token) {
+                        try {
+                            const responseEvento = await axios.get(`${URL_EVENTO}/${id}`);
+                            const responsePagamentos = await axios.get(`${URL_PAGAMENTOS}/${id}`);
+                            setDadosEvento(responseEvento.data());
+                            setDadosPagamentos(responsePagamentos.data());
+                        } catch (error) {
+                            console.error(error);
+                        }
                         setIsAuthenticated(true);
                     } else {
                         router.push('/adm/login');
@@ -53,8 +63,6 @@ export default function Layout ({children}){
 
     if (!isAuthenticated) {
         return null;
-    }else{
-        console.log(dadosPraca)
     }
 
     return (
@@ -77,7 +85,7 @@ export default function Layout ({children}){
                 </div>
             </nav>
             <section className="d-flex layout-painel justify-content-center mt-4">
-                <dadosPracaContext.Provider value={{...dadosPraca}} >
+                <dadosPracaContext.Provider value={{dadosPraca, dadosEvento, dadosPagamentos}} >
                     {children}
                 </dadosPracaContext.Provider>
             </section>

@@ -11,7 +11,8 @@ import { URL_EVENTO } from '@/components/URLs/index';
 export default function DadosEvento (){
     const router = useRouter();
 
-    const { id, url } = useContext(dadosPracaContext);
+    const { dadosPraca } = useContext(dadosPracaContext);
+    const { id, url } = dadosPraca;
 
     const [formData, setFormData] = useState({
         id,

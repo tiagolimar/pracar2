@@ -8,7 +8,8 @@ import { dadosPracaContext } from "@/contexts/dadosPracaContext.jsx";
 import { URL_PAGAMENTOS } from "@/components/URLs/index.js";
 
 export default function Pagamentos(){
-    const { id } = useContext(dadosPracaContext);
+    const { dadosPraca } = useContext(dadosPracaContext);
+    const { id } = dadosPraca;
 
     const [formData, setFormData] = useState({
         id,

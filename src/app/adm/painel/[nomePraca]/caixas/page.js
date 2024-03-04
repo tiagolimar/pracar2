@@ -10,7 +10,8 @@ import { gerarSenhaCaixa } from "@/components/adm/painel/caixas/index.js";
 import { URL_UPDATE_SENHA_CAIXA } from "@/components/URLs/index.js";
 
 export default function Caixas (){
-    const { id, url, senha_caixa } = useContext(dadosPracaContext);
+    const { dadosPraca } = useContext(dadosPracaContext);
+    const { id, url, senha_caixa } = dadosPraca;
     const [senha, setSenha] = useState(senha_caixa);
 
 	const handleSubmit = async (e) => {
