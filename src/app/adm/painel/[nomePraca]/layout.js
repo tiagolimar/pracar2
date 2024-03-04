@@ -55,6 +55,8 @@ export default function Layout ({children}){
 
     if (!isAuthenticated) {
         return null;
+    }else{
+        console.log(dadosPraca)
     }
 
     return (

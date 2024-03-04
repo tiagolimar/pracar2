@@ -1,0 +1,21 @@
+@media (max-width: 456px) {
+    .offcanvas-start {
+        max-width: 250px;
+    }
+}
+
+@media (min-width: 456px) {
+    .painel-home {
+        display: flex;
+        flex-wrap: wrap;
+        /* align-items: center; */
+        justify-content: center;
+    }
+    .painel-home h1 {
+        width: 100vw;
+    }
+    .painel-home-section {
+        max-width: 450px;
+        width: 100%;
+    }
+}
