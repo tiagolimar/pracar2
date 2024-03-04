@@ -21,7 +21,7 @@ export default function PracaPage() {
 
     const infoPraca = {
         cabecalho: "Informações da Praca",
-        info:[
+        infos:[
             {campo:"Nome da praça:", valor:nome},
             {campo:"Link de acesso ao painel:", valor:nome},
         ]
@@ -29,7 +29,7 @@ export default function PracaPage() {
 
     const infoEvento = {
         cabecalho:"Informações do Evento", 
-        info:[
+        infos:[
             {campo:"Nome do Evento:", valor:nome},
             {campo:"Local do Evento:", valor:nome},
             {campo:"Data de Início:", valor:nome},
@@ -41,7 +41,7 @@ export default function PracaPage() {
 
     const infoPagamento = {
         cabecalho:"Informações de Pagamento", 
-        info:[
+        infos:[
             {campo:"Chave Pix A:", valor:nome},
             {campo:"Nome A:", valor:nome},
             {campo:"Chave Pix B:", valor:nome},
@@ -61,9 +61,15 @@ export default function PracaPage() {
             <div className="painel-home-section border border-black rounded m-4 p-4">
                 <h2 className="text-wrap">{`Resumo de Informações`}</h2>
                 <hr />
-                {infoPraca.map((info,id)=>{
+                {resumo.map(({cabecalho, infos},id)=>{
                     return(
-                        <ItemPainelHome key={id} info={info} />
+                        <div key={id}>
+                            <h3>{cabecalho}</h3>
+                            {infos.map((info,id)=>{
+                                return <ItemPainelHome key={id} info={info} />
+                            })}
+                            {+id == resumo.length-1? null:<hr />}
+                        </div>
                     )
                 })}
             </div>

@@ -8,7 +8,7 @@ import { ItensPainel, getCookie, title } from "@/components/adm/painel";
 import { URL_CHECK } from '@/components/URLs';
 import { dadosPracaContext } from '@/contexts/dadosPracaContext';
 
-import './layout.css'
+import './layout.css';
 
 export default function Layout ({children}){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,20 +30,18 @@ export default function Layout ({children}){
                     const token = dados.data.token;
                     const {id, nome, senha_caixa, url} = dados.data;
                     
-                    setDadosPraca({id, nome:title(nome),senha_caixa, url});
+                    setDadosPraca({id, nome:title(nome), senha_caixa, url});
                     
                     const authToken = getCookie('auth_token_pracar2');
     
                     if (authToken === token) {
                         setIsAuthenticated(true);
                     } else {
-                        console.log("É necessário atualizar sua autorização, faça login.");
                         router.push('/adm/login');
                     }
                 }else{
                     router.push('/adm/login');
                 }
-
             } catch (error) {
                 alert(error.response.data.message);
                 router.push('/adm/login');
