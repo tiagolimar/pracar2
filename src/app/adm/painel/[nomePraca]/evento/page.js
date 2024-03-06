@@ -11,34 +11,22 @@ import { URL_EVENTO } from '@/components/URLs/index';
 export default function DadosEvento (){
     const router = useRouter();
 
-    const { dadosPraca } = useContext(dadosPracaContext);
+    const { dadosPraca, dadosEvento } = useContext(dadosPracaContext);
     const { id, url } = dadosPraca;
+
+    let {nome, local, dataInicio, dataTermino, horaInicio, horaTermino } = dadosEvento;
+    dataInicio = dataInicio?.substring(0,10);
+    dataTermino = dataTermino?.substring(0,10);
 
     const [formData, setFormData] = useState({
         id,
-        nome: "",
-        local: "",
-        dataInicio: "",
-        dataTermino: "",
-        horaInicio: "",
-        horaTermino: "",
+        nome,
+        local,
+        dataInicio,
+        dataTermino,
+        horaInicio,
+        horaTermino
     });
-
-    useEffect(() => {
-        const fetchFormData = async () => {
-            try {
-                const response = await axios.get(`${URL_EVENTO}/${id}`);
-                let {nome, local, dataInicio, dataTermino, horaInicio, horaTermino } = response.data;
-                dataInicio = dataInicio?.substring(0,10);
-                dataTermino = dataTermino?.substring(0,10);
-                setFormData({ id, nome, local, dataInicio, dataTermino, horaInicio, horaTermino });
-            } catch (error) {
-                console.error("Erro ao buscar dados:", error);
-            }
-        };
-
-        fetchFormData();
-    }, [id])
     
     const handleChange = (e) => {
         const { name, value } = e.target;

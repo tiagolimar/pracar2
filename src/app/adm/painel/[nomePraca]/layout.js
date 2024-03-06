@@ -40,8 +40,8 @@ export default function Layout ({children}){
                         try {
                             const responseEvento = await axios.get(`${URL_EVENTO}/${id}`);
                             const responsePagamentos = await axios.get(`${URL_PAGAMENTOS}/${id}`);
-                            setDadosEvento(responseEvento.data());
-                            setDadosPagamentos(responsePagamentos.data());
+                            setDadosEvento(responseEvento.data);
+                            setDadosPagamentos(responsePagamentos.data);
                         } catch (error) {
                             console.error(error);
                         }

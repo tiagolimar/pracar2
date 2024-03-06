@@ -8,14 +8,23 @@
     .painel-home {
         display: flex;
         flex-wrap: wrap;
-        /* align-items: center; */
         justify-content: center;
     }
     .painel-home h1 {
         width: 100vw;
     }
     .painel-home-section {
-        max-width: 450px;
+        max-width: 600px;
         width: 100%;
     }
+}
+
+.painel-home-line p{
+    margin-top:0;
+    margin-bottom:0;
+}
+
+p.painel-home-line-valor{
+    margin-top:4px;
+    margin-bottom:8px;
 }

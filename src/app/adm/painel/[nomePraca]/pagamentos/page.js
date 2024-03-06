@@ -8,30 +8,18 @@ import { dadosPracaContext } from "@/contexts/dadosPracaContext.jsx";
 import { URL_PAGAMENTOS } from "@/components/URLs/index.js";
 
 export default function Pagamentos(){
-    const { dadosPraca } = useContext(dadosPracaContext);
+    const { dadosPraca, dadosPagamentos } = useContext(dadosPracaContext);
     const { id } = dadosPraca;
+
+    const { chavePixA, nomePixA, chavePixB, nomePixB } = dadosPagamentos;
 
     const [formData, setFormData] = useState({
         id,
-        nomePixA: '',
-        nomePixB: '',
-        chavePixA: '',
-        chavePixB: '',
+        nomePixA,
+        nomePixB,
+        chavePixA,
+        chavePixB,
     }); 
-
-    useEffect(() => {
-        const fetchFormData = async () => {
-            try {
-                const response = await axios.get(`${URL_PAGAMENTOS}/${id}`);
-                const { chavePixA, nomePixA, chavePixB, nomePixB } = response.data;
-                setFormData({ id, chavePixA, nomePixA, chavePixB, nomePixB });
-            } catch (error) {
-                console.error("Erro ao buscar dados:", error);
-            }
-        };
-
-        fetchFormData();
-    }, [id])
 
     async function handleSubmit (e){
 		e.preventDefault();
