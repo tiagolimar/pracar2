@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 
@@ -9,7 +10,8 @@ import { URL_PAGAMENTOS } from "@/components/URLs/index.js";
 
 export default function Pagamentos(){
     const { dadosPraca, dadosPagamentos } = useContext(dadosPracaContext);
-    const { id } = dadosPraca;
+    const { id, url } = dadosPraca;
+    const router = useRouter()
 
     const { chavePixA, nomePixA, chavePixB, nomePixB } = dadosPagamentos;
 
@@ -30,6 +32,7 @@ export default function Pagamentos(){
 				alert("Não foi possível atualizar os dados.");
 			}else{
 				alert("Os dados foram atualizados com sucesso.");
+                router.push(`/adm/painel/${url}`)
 			}
 		} catch (error) {
             const message = error.response.data?.message;

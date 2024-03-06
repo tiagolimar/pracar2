@@ -54,7 +54,7 @@ export default function Caixas (){
         </form>
         <h4 className="mt-4">
             Acesse o {" "}
-            <Link className="fs-5" href="/caixa/cadastrar" target="_blank">
+            <Link className="fs-5" href={`/caixa/${url}`} target="_blank">
                 Sistema dos Caixas.
             </Link>
         </h4>

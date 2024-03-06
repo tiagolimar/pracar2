@@ -28,9 +28,9 @@ export default function PracaPage() {
         cabecalho: "Informações da Praça",
         infos:[
             {campo:"Nome da praça:", valor:nome},
-            {campo:"Acesso ao painel de gerenciamento:", valor:`/adm/painel/${url}`},
-            {campo:"Acesso ao Sistema dos Caixas:", valor:`/adm/painel/${url}`},
-            {campo:"Acesso ao Cardápio Online:", valor:`/adm/painel/${url}`},
+            {campo:"Painel de gerenciamento:", valor:`/adm/painel/${url}`},
+            {campo:"Sistema dos Caixas:", valor:`/adm/painel/${url}`},
+            {campo:"Cardápio Online:", valor:`/adm/painel/${url}`},
         ]
     };
 
