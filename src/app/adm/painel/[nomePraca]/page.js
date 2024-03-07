@@ -2,15 +2,29 @@
 
 import { useContext } from "react";
 
+
 import { dadosPracaContext } from "@/contexts/dadosPracaContext";
 import "./page.css"
+import Link from "next/link.js";
+import CopyLinkButton from "@/components/adm/CopyLinkButton.jsx";
 
 function ItemPainelHome ({info}){
-    const { campo, valor } = info;
+    const { campo, valor, tipo } = info;
+    
+    function LinkValor({valor}){
+        return valor? <Link className="btn btn-outline-dark m-2 flex-grow-1" href={valor}>Acessar</Link>:undefined
+    }
+
     return(
-        <div className="painel-home-line d-flex flex-column">
+        <div className="painel-home-line d-flex flex-column mt-2">
             <p className="fs-5 fw-bold border-black  border-bottom rounded">{campo}</p>
-            <p className="painel-home-line-valor fs-5 text-truncate">{valor}</p>
+            {tipo == "link" ?
+                <div className="d-flex">
+                    <CopyLinkButton linkToCopy={valor} />
+                    <LinkValor valor={valor == window.location.href?"":valor} />
+                </div>
+                :
+                <p className="painel-home-line-valor fs-5 text-truncate">{valor}</p>}
         </div>
     )
 }
@@ -28,9 +42,9 @@ export default function PracaPage() {
         cabecalho: "Informações da Praça",
         infos:[
             {campo:"Nome da praça:", valor:nome},
-            {campo:"Painel de gerenciamento:", valor:`/adm/painel/${url}`},
-            {campo:"Sistema dos Caixas:", valor:`/adm/painel/${url}`},
-            {campo:"Cardápio Online:", valor:`/adm/painel/${url}`},
+            {tipo:"link", campo:"Painel de gerenciamento:", valor: window.location.href},
+            {tipo:"link", campo:"Sistema dos Caixas:", valor:`${window.location.origin}/caixa/${url}`},
+            {tipo:"link", campo:"Cardápio Online:", valor:`${window.location.origin}/cardapio/${url}`},
         ]
     };
 
@@ -47,7 +61,7 @@ export default function PracaPage() {
     };
 
     const infoPagamento = {
-        cabecalho:"Informações de Pagamento", 
+        cabecalho:"Dados de Pagamento", 
         infos:[
             {campo:"Chave Pix A:", valor:chavePixA},
             {campo:"Nome A:", valor:nomePixA},

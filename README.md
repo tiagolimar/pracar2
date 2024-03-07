@@ -37,6 +37,24 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Checklist
 
-- [ ] 1. Incluir verificação de usuário no arquivo "layout.js" da pasta "painel"
-- [ ] 1. Verificar necessidade de criar palavras reservadas no server para impedir criação de certo nomes de praças
-- [ ] Ler dados da praça para obter o nome da praça no painel
+Issues
+1. Criar um botão de logout no navbar do painel;
+1. Criptografar token da praça;
+1. Fazer com que o Form de Eventos e Pagamentos atualizem no resumo de informações (combinar useContext com useState);
+1. Incluir no resumo de informações um botão para editar as informações;
+1. Fazer com que caso não haja alguma informação seja exibido um texto "Sem dados..." em cinza;
+
+1. Fazer deploy e testar a aplicação;
+
+1. Criar conteúdo da seção Cardápio;
+    - Criar layout do Cardápio;
+    - Fazer sistema interno de criação de produtos apartir de arquivo csv;
+    - Criar tabela de produtos e criar tabela de cardápios;
+    - Fazer integração do Front com o Back
+
+1. Criar sistema do caixa;
+    - Separar dados do caixa em uma tabela a parte (tb_caixas);
+    - Criar token do sistema do caixa;
+
+Issues Removidos
+1. Verificar necessidade de criar palavras reservadas no server para impedir criação de certo nomes de praças
