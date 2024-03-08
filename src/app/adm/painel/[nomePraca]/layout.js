@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { ItensPainel, getCookie, title } from "@/components/adm/painel";
 import { URL_CHECK, URL_EVENTO, URL_PAGAMENTOS } from '@/components/URLs';
+import { COOKIE_PRACA } from '@/components/URLs/cookies';
 import { dadosPracaContext } from '@/contexts/dadosPracaContext';
 
 import './layout.css';
@@ -34,7 +35,7 @@ export default function Layout ({children}){
                     
                     setDadosPraca({id, nome:title(nome), senha_caixa, url});
                     
-                    const authToken = getCookie('auth_token_pracar2');
+                    const authToken = getCookie(COOKIE_PRACA);
     
                     if (authToken === token) {
                         try {
@@ -72,7 +73,7 @@ export default function Layout ({children}){
                     <button className="navbar-toggler border-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>
-                    <a className="navbar-brand fw-bold text-truncate" href="#">{`Praça R2 - ${dadosPraca.nome}`}</a>
+                    <a className="navbar-brand fw-bold text-truncate" href={window.location.origin+`/adm/painel/${url}`}>{`Praça R2 - ${dadosPraca.nome}`}</a>
                     <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="label">
                         <div className="offcanvas-header shadow-sm bg-dark text-light" data-bs-theme="dark">
                             <h5 className="offcanvas-title" id="label">Menu</h5>

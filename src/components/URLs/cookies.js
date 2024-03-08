@@ -1,0 +1,1 @@
+export const COOKIE_PRACA = 'auth_token_pracar2';

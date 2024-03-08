@@ -38,10 +38,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Checklist
 
 Issues
-1. Criar um botão de logout no navbar do painel;
 1. Criptografar token da praça;
 1. Fazer com que o Form de Eventos e Pagamentos atualizem no resumo de informações (combinar useContext com useState);
-1. Incluir no resumo de informações um botão para editar as informações;
 1. Fazer com que caso não haja alguma informação seja exibido um texto "Sem dados..." em cinza;
 
 1. Fazer deploy e testar a aplicação;
