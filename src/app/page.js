@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ContainerMain from "@/components/ContainerMain";
+import WakeUpServer from "@/components/WakeUpServer";
 
 export default function Home() {
     return (
@@ -21,6 +22,7 @@ export default function Home() {
         <Link className="btn btn-dark shadow fw-bold mb-4" href="/adm">
             FAZER LOGIN
         </Link>
+        <WakeUpServer />
         </ContainerMain>
     );
 }

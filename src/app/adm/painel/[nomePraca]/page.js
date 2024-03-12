@@ -7,8 +7,11 @@ import { dadosPracaContext } from "@/contexts/dadosPracaContext";
 import CopyLinkButton from "@/components/adm/CopyLinkButton.jsx";
 import "./page.css"
 
+const defaultValue = 'Vazio';
+
 function ItemPainelHome ({info}){
     const { campo, valor, tipo } = info;
+    const secondary = valor==defaultValue? 'text-secondary' : '';
     
     function LinkValor({valor}){
         return valor? <Link className="btn btn-outline-primary m-2 flex-grow-1" href={valor} target="_blank">Acessar</Link>:undefined
@@ -23,7 +26,7 @@ function ItemPainelHome ({info}){
                     <LinkValor valor={valor == window.location.href?"":valor} />
                 </div>
                 :
-                <p className="painel-home-line-valor fs-5 text-truncate">{valor}</p>}
+                <p className={"painel-home-line-valor fs-5 text-truncate "+secondary}>{valor}</p>}
         </div>
     )
 }
@@ -51,12 +54,12 @@ export default function PracaPage() {
         cabecalho:"Informações do Evento",
         url:`/adm/painel/${url}/evento`,
         infos:[
-            {campo:"Nome do Evento:", valor:dadosEvento.nome},
-            {campo:"Local do Evento:", valor:local},
-            {campo:"Data de Início:", valor:dataInicio},
-            {campo:"Data de Término:", valor:dataTermino},
-            {campo:"Hora de Início:", valor:horaInicio},
-            {campo:"Hora de Término:", valor:horaTermino},
+            {campo:"Nome do Evento:", valor:dadosEvento.nome || defaultValue},
+            {campo:"Local do Evento:", valor:local || defaultValue},
+            {campo:"Data de Início:", valor:dataInicio || defaultValue},
+            {campo:"Data de Término:", valor:dataTermino || defaultValue},
+            {campo:"Hora de Início:", valor:horaInicio || defaultValue},
+            {campo:"Hora de Término:", valor:horaTermino || defaultValue},
         ]
     };
 
@@ -64,10 +67,10 @@ export default function PracaPage() {
         cabecalho:"Dados de Pagamento",
         url:`/adm/painel/${url}/pagamentos`,
         infos:[
-            {campo:"Chave Pix A:", valor:chavePixA},
-            {campo:"Nome A:", valor:nomePixA},
-            {campo:"Chave Pix B:", valor:chavePixB},
-            {campo:"Nome B:", valor:nomePixB},
+            {campo:"Chave Pix A:", valor:chavePixA || defaultValue},
+            {campo:"Nome A:", valor:nomePixA || defaultValue},
+            {campo:"Chave Pix B:", valor:chavePixB || defaultValue},
+            {campo:"Nome B:", valor:nomePixB || defaultValue},
         ]
     };
 

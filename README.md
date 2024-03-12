@@ -40,9 +40,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 Issues
 1. Criptografar token da praça;
 1. Fazer com que o Form de Eventos e Pagamentos atualizem no resumo de informações (combinar useContext com useState);
-1. Fazer com que caso não haja alguma informação seja exibido um texto "Sem dados..." em cinza;
 
 1. Fazer deploy e testar a aplicação;
+
+1. Fazer verificação de data e horário (não permitir data e horário de término anterior ao de início)
+1. Fazer verificação de horário (data atual ou futura)
 
 1. Criar conteúdo da seção Cardápio;
     - Criar layout do Cardápio;
