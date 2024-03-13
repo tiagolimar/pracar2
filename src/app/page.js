@@ -11,7 +11,7 @@ export default function Home() {
         <p className="text-start fs-5 ms-3">
             Este é um sistema criado para o gerenciamento de praças de alimentação.
             Na próxima tela, você poderá fazer o login caso já tenha um cadastro.
-            É a sua primeira vez? Então, clique no link "cadastrar" na próxima tela.
+            É a sua primeira vez? Então, clique no link de cadastro na próxima tela.
         </p>
         <div className="alert alert-warning" role="alert">
             <h4 className="alert-heading">ATENÇÃO!!!</h4>
