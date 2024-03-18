@@ -1,7 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 
 import ContainerMain from "@/components/ContainerMain";
@@ -13,7 +12,6 @@ import BackHome from "@/components/adm/painel/BackHome";
 import LoadingData from '@/components/LoadingData';
 
 export default function DadosEvento (){
-    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const { dadosPraca, dadosEvento } = useContext(dadosPracaContext);
@@ -40,6 +38,16 @@ export default function DadosEvento (){
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+        const inicioDateTime = new Date(`${formData.dataInicio}T${formData.horaInicio}`);
+        const terminoDateTime = new Date(`${formData.dataTermino}T${formData.horaTermino}`);
+        
+        if (terminoDateTime < inicioDateTime) {
+            e.target.elements.dataTermino.focus();
+            alert("A data e hora de término não podem ser anteriores à data e hora de início.");
+            return;
+        }
+
 		try {
             setIsLoading(true);
 			const {data} = await axios.patch(URL_EVENTO, { ...formData });
@@ -50,7 +58,7 @@ export default function DadosEvento (){
 			}else{
                 setIsLoading(false);
 				alert("Os dados foram atualizados com sucesso.");
-                router.push(`/adm/painel/${url}`);
+                window.location.href = `/adm/painel/${url}`;
 			}
 		} catch (error) {
             if(error.response){
@@ -68,29 +76,29 @@ export default function DadosEvento (){
         <h1>Dados do Evento</h1>
         <p className="text-secondary fs-5">Preencha os dados do evento. Essas informações ficam visíveis para os usuários no cardápio online.</p>
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
-            <label className="text-start">
-                Nome do Evento:
-                <input className="form-control border-black" type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Nome do Evento" required />
+            <label className="text-start"> Nome do Evento:
+                <input className="form-control border-black" type="text" name="nome" value={formData.nome} 
+                onChange={handleChange} placeholder="Nome do Evento" required />
             </label>
-            <label className="text-start">
-                Local do Evento:
-                <input className="form-control border-black" type="text" name="local" value={formData.local} onChange={handleChange} placeholder="Local do Evento" required />
+            <label className="text-start"> Local do Evento:
+                <input className="form-control border-black" type="text" name="local" value={formData.local} 
+                onChange={handleChange} placeholder="Local do Evento" required />
             </label>
-            <label className="text-start">
-                Data de Início:
-                <input className="form-control border-black" type="date" name="dataInicio" value={formData.dataInicio} onChange={handleChange} />
+            <label className="text-start"> Data de Início:
+                <input className="form-control border-black" type="date" name="dataInicio" value={formData.dataInicio} 
+                onChange={handleChange} />
             </label>
-            <label className="text-start">
-                Data de Término:
-                <input className="form-control border-black" type="date" name="dataTermino" value={formData.dataTermino} onChange={handleChange} />
+            <label className="text-start"> Data de Término:
+                <input className="form-control border-black" type="date" name="dataTermino" value={formData.dataTermino} 
+                onChange={handleChange} />
             </label>
-            <label className="text-start">
-                Hora de Início:
-                <input className="form-control border-black" type="time" name="horaInicio" value={formData.horaInicio} onChange={handleChange} />
+            <label className="text-start"> Hora de Início:
+                <input className="form-control border-black" type="time" name="horaInicio" value={formData.horaInicio} 
+                onChange={handleChange} />
             </label>
-            <label className="text-start">
-                Hora de Término:
-                <input className="form-control border-black" type="time" name="horaTermino" value={formData.horaTermino} onChange={handleChange} />
+            <label className="text-start"> Hora de Término:
+                <input className="form-control border-black" type="time" name="horaTermino" value={formData.horaTermino} 
+                onChange={handleChange} />
             </label>
             <button className="btn btn-dark">Salvar</button>
         </form>

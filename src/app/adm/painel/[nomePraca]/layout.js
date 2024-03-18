@@ -12,13 +12,13 @@ import { dadosPracaContext } from '@/contexts/dadosPracaContext';
 import './layout.css';
 
 export default function Layout ({children}){
+    const {nomePraca} = useParams();
+    const url = nomePraca;
+    
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [dadosPraca, setDadosPraca] = useState({});
     const [dadosEvento, setDadosEvento] = useState({});
     const [dadosPagamentos, setDadosPagamentos] = useState({});
-
-    const {nomePraca} = useParams();
-    const url = nomePraca;
 
     const router = useRouter();
 

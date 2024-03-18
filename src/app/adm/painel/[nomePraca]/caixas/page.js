@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation";
 import Link from "next/link"
 
 import { useContext, useState } from "react";
@@ -16,7 +15,6 @@ import BackHome from '@/components/adm/painel/BackHome';
 import LoadingData from "@/components/LoadingData";
 
 export default function Caixas (){
-    const router = useRouter();
     const { dadosPraca } = useContext(dadosPracaContext);
     const { id, url, senha_caixa } = dadosPraca;
     const [senha, setSenha] = useState(senha_caixa);
@@ -36,7 +34,7 @@ export default function Caixas (){
                     }else{
                         setIsLoading(false);
                         alert("Senha salva com sucesso.")
-                        router.push(`/adm/painel/${url}`);
+                        window.location.href = `/adm/painel/${url}`;
                     }
                 } catch (error) {
                     const message = error.response.data?.message;
@@ -48,7 +46,7 @@ export default function Caixas (){
                 }
             }
         }else{
-            router.push(`/adm/painel/${url}`);
+            window.location.href = `/adm/painel/${url}`;
             alert("Senha salva com sucesso.")
         }
 	};

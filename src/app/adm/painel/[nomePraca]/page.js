@@ -44,7 +44,7 @@ export default function PracaPage() {
     function BtnPencil(){
         return(
             <button className="navbar-toggler border-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <i className="bi bi-pencil text-black" style={{"font-size": "1.5em"}}></i>
+            <i className="bi bi-pencil text-black" style={{"fontSize": "1.5em"}}></i>
             </button>
         )
     }
@@ -61,7 +61,7 @@ export default function PracaPage() {
                                 <header className="d-flex gap-3 justify-content-center">
                                     <h3 className="text-center">{cabecalho}</h3>
                                     {url && <Link href={url}>
-                                        <i className="bi bi-pencil text-black" style={{"font-size": "1.5em"}}></i>
+                                        <i className="bi bi-pencil text-black" style={{"fontSize": "1.5em"}}></i>
                                     </Link> || <BtnPencil></BtnPencil>}
                                 </header>
                                 <hr />

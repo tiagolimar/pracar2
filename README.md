@@ -38,14 +38,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Checklist
 
 Issues
-1. Melhorar interface da home do painel de gerenciamento
-1. Adicionar botão de editar para a senha do caixa
-1. Criptografar token da praça;
-1. Fazer com que o Form de Eventos e Pagamentos atualizem no resumo de informações (combinar useContext com useState);
-
-1. Fazer verificação de data e horário (não permitir data e horário de término anterior ao de início)
-1. Fazer verificação de horário (data atual ou futura)
-
 1. Criar tabela de produtos
     - 
 
@@ -60,4 +52,5 @@ Issues
     - Criar token do sistema do caixa;
 
 Issues Removidos
+1. Criptografar token da praça;
 1. Verificar necessidade de criar palavras reservadas no server para impedir criação de certo nomes de praças

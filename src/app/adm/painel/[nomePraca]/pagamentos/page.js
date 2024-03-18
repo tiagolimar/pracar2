@@ -1,7 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 
 import ContainerMain from "@/components/ContainerMain";
@@ -15,7 +14,6 @@ export default function Pagamentos(){
     const { dadosPraca, dadosPagamentos } = useContext(dadosPracaContext);
     const [isLoading, setIsLoading] = useState(false);
     const { id, url } = dadosPraca;
-    const router = useRouter()
 
     const { chavePixA, nomePixA, chavePixB, nomePixB } = dadosPagamentos;
 
@@ -39,7 +37,7 @@ export default function Pagamentos(){
 			}else{
                 setIsLoading(false);
                 alert("Os dados foram atualizados com sucesso.");
-                router.push(`/adm/painel/${url}`)
+                window.location.href = `/adm/painel/${url}`;
 			}
 		} catch (error) {
             const message = error.response.data?.message;
