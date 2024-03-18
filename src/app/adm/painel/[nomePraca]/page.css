@@ -6,20 +6,12 @@
     }
 }
 
-@media (min-width: 456px) {
-    .painel-home {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .painel-home h1 {
-        width: 100vw;
-    }
+/* @media (min-width: 456px) {
     .painel-home-section {
         max-width: 600px;
         width: 100%;
     }
-}
+} */
 
 .painel-home-line p{
     margin-top:0;
@@ -29,4 +21,11 @@
 p.painel-home-line-valor{
     margin-top:4px;
     margin-bottom:8px;
+}
+
+.btn-copiar:hover{
+    color: #031633;
+    text-decoration: underline;
+    outline: none;
+    border: none;
 }

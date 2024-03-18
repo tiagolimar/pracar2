@@ -4,12 +4,17 @@ import { useRouter } from "next/navigation";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 
-import ContainerMain from "@/components/ContainerMain.jsx";
+import ContainerMain from "@/components/ContainerMain";
 import { dadosPracaContext } from "@/contexts/dadosPracaContext";
-import { URL_EVENTO } from '@/components/URLs/index';
+
+import { URL_EVENTO } from '@/components/URLs';
+
+import BackHome from "@/components/adm/painel/BackHome";
+import LoadingData from '@/components/LoadingData';
 
 export default function DadosEvento (){
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
 
     const { dadosPraca, dadosEvento } = useContext(dadosPracaContext);
     const { id, url } = dadosPraca;
@@ -36,11 +41,14 @@ export default function DadosEvento (){
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+            setIsLoading(true);
 			const {data} = await axios.patch(URL_EVENTO, { ...formData });
             
 			if (data.message){
+                setIsLoading(false);
 				alert("Não foi possível atualizar os dados.");
 			}else{
+                setIsLoading(false);
 				alert("Os dados foram atualizados com sucesso.");
                 router.push(`/adm/painel/${url}`);
 			}
@@ -56,6 +64,7 @@ export default function DadosEvento (){
 
     return(
     <ContainerMain>
+        <BackHome url={url}/>
         <h1>Dados do Evento</h1>
         <p className="text-secondary fs-5">Preencha os dados do evento. Essas informações ficam visíveis para os usuários no cardápio online.</p>
         <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
@@ -85,6 +94,7 @@ export default function DadosEvento (){
             </label>
             <button className="btn btn-dark">Salvar</button>
         </form>
+        <LoadingData on={isLoading} />
       </ContainerMain>
     )
 }

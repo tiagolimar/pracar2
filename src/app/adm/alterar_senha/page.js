@@ -2,14 +2,20 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link"
+import { useState } from "react";
 import bcrypt from "bcryptjs";
 import axios from "axios";
 
 import { URL_UPDATE } from "@/components/URLs";
 import ContainerMain from "@/components/ContainerMain";
+import WakeUpServer from "@/components/WakeUpServer";
+import LoadingData from "@/components/LoadingData";
+import BackHome from "@/components/adm/painel/BackHome";
 
 export default function AlterarSenha (){
 	const router = useRouter();
+    
+    const [isLoading, setIsLoading] = useState(false);
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -23,12 +29,15 @@ export default function AlterarSenha (){
 				const senha_criptografada = await bcrypt.hash(nova_senha, 10);
 
 				try {
+                    setIsLoading(true);
 					const {data} = await axios.patch(URL_UPDATE, {nome, senha, nova_senha:senha_criptografada })
 					
 					if (data.message){
+                        setIsLoading(false);
 						alert("O nome informado não existe.")
 					}else{
-						alert("O cadastro foi atualizado com sucesso! Faça o login na página a seguir.")
+                        setIsLoading(false);
+                        alert("O cadastro foi atualizado com sucesso! Faça o login na página a seguir.")
 						router.push("/adm/login");
 					}
 				} catch (error) {
@@ -49,6 +58,7 @@ export default function AlterarSenha (){
 
     return(
 		<ContainerMain>
+            <BackHome url={url}/>
 			<h1>Praça R2</h1>
 			<h3 className="text-secondary">Alteração de Senha</h3>
 			<form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
@@ -64,6 +74,8 @@ export default function AlterarSenha (){
 				<Link href="/adm">Fazer Login</Link>
 				<Link href="/adm/cadastrar">Cadastrar</Link>
 			</div>
+            <WakeUpServer />
+            <LoadingData on={isLoading} />
 		</ContainerMain>
     )
 }

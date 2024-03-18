@@ -20,7 +20,7 @@ export default function WakeUpServer() {
     }, []);
 
     if (isLoading) {
-        return <div className="placeholder-wave">Aguarde...</div>;
+        return <div className="placeholder-wave">Aguarde, conectando com o servidor...</div>;
     }
 
     return null; // Retorna null ou qualquer outro componente que você queira renderizar após a requisição ser concluída

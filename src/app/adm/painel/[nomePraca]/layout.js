@@ -85,7 +85,7 @@ export default function Layout ({children}){
                     </div>
                 </div>
             </nav>
-            <section className="d-flex layout-painel justify-content-center mt-4">
+            <section className="d-flex layout-painel justify-content-center mt-4 bg-body-tertiary">
                 <dadosPracaContext.Provider value={{dadosPraca, dadosEvento, dadosPagamentos}} >
                     {children}
                 </dadosPracaContext.Provider>

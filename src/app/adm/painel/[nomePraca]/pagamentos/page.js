@@ -5,11 +5,15 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 
 import ContainerMain from "@/components/ContainerMain";
-import { dadosPracaContext } from "@/contexts/dadosPracaContext.jsx";
-import { URL_PAGAMENTOS } from "@/components/URLs/index.js";
+import { dadosPracaContext } from "@/contexts/dadosPracaContext";
+import { URL_PAGAMENTOS } from "@/components/URLs";
+
+import BackHome from '@/components/adm/painel/BackHome';
+import LoadingData from '@/components/LoadingData';
 
 export default function Pagamentos(){
     const { dadosPraca, dadosPagamentos } = useContext(dadosPracaContext);
+    const [isLoading, setIsLoading] = useState(false);
     const { id, url } = dadosPraca;
     const router = useRouter()
 
@@ -26,12 +30,15 @@ export default function Pagamentos(){
     async function handleSubmit (e){
 		e.preventDefault();
 		try {
+            setIsLoading(true);
 			const {data} = await axios.patch(URL_PAGAMENTOS, { ...formData });
             
 			if (data.message){
+                setIsLoading(false);
 				alert("Não foi possível atualizar os dados.");
 			}else{
-				alert("Os dados foram atualizados com sucesso.");
+                setIsLoading(false);
+                alert("Os dados foram atualizados com sucesso.");
                 router.push(`/adm/painel/${url}`)
 			}
 		} catch (error) {
@@ -51,6 +58,7 @@ export default function Pagamentos(){
 
     return(
         <ContainerMain>
+            <BackHome url={url} />
             <h1>Pagamento Via Pix</h1>
             <p className="text-secondary fs-5">Cadastre aqui as suas chaves pix para que os usuários possam efetuar pagamentos via Pix</p>
             <form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
@@ -64,6 +72,7 @@ export default function Pagamentos(){
                 <input className="form-control border-black" name="nomePixB" placeholder="Nome B" type="text" onChange={handleChange} value={formData.nomePixB} />
                 <button className="btn btn-dark flex-grow-1" type="submit">Salvar</button>
             </form>
+            <LoadingData on={isLoading} />
         </ContainerMain>
     )
 }

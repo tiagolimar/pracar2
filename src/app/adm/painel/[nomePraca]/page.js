@@ -4,7 +4,9 @@ import { useContext } from "react";
 import Link from "next/link.js";
 
 import { dadosPracaContext } from "@/contexts/dadosPracaContext";
-import CopyLinkButton from "@/components/adm/CopyLinkButton.jsx";
+import CopyLinkButton from "@/components/adm/CopyLinkButton";
+import CopyButton from "@/components/adm/CopyButton";
+import getResume from './pageResume'
 import "./page.css"
 
 const defaultValue = 'Vazio';
@@ -19,81 +21,54 @@ function ItemPainelHome ({info}){
 
     return(
         <div className="painel-home-line d-flex flex-column mt-2">
-            <p className="fs-5 ps-2 fw-bold border-secondary border-bottom rounded">{campo}</p>
+            <div className="d-flex flex-row flex-start align-items-center">
+                <p className="fs-5 ps-2 fw-bold">{campo}</p>
+                { tipo == "link"? null : <CopyButton value={valor}/> }
+            </div>
             {tipo == "link" ?
                 <div className="d-flex ms-2">
                     <CopyLinkButton linkToCopy={valor} />
                     <LinkValor valor={valor == window.location.href?"":valor} />
                 </div>
                 :
-                <p className={"painel-home-line-valor fs-5 text-truncate "+secondary}>{valor}</p>}
+                    <p className={"painel-home-line-valor fs-5 ms-2 text-truncate "+secondary}>{valor}</p>
+            }
         </div>
     )
 }
 
 export default function PracaPage() {
     const { dadosPraca, dadosEvento, dadosPagamentos } = useContext(dadosPracaContext);
-    const { nome, url } = dadosPraca;
-    const { chavePixA, nomePixA, chavePixB, nomePixB } = dadosPagamentos;
-    let { local, dataInicio, dataTermino, horaInicio, horaTermino } = dadosEvento;
+    const resumo = getResume({ dadosPraca, dadosEvento, dadosPagamentos });
 
-    dataInicio = dataInicio?.substring(0,10);
-    dataTermino = dataTermino?.substring(0,10);
+    function BtnPencil(){
+        return(
+            <button className="navbar-toggler border-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <i className="bi bi-pencil text-black" style={{"font-size": "1.5em"}}></i>
+            </button>
+        )
+    }
 
-    const infoPraca = {
-        cabecalho: "Informações da Praça",
-        infos:[
-            {campo:"Nome da praça:", valor:nome},
-            {tipo:"link", campo:"Painel de gerenciamento:", valor: window.location.href},
-            {tipo:"link", campo:"Sistema dos Caixas:", valor:`${window.location.origin}/caixa/${url}`},
-            {tipo:"link", campo:"Cardápio Online:", valor:`${window.location.origin}/cardapio/${url}`},
-        ]
-    };
+    return (
+        <div className="painel-home w-100 d-flex flex-column align-items-center bg-body-tertiary">
+            <h1 className="text-center fs-3">Painel de Gerenciamento</h1>
 
-    const infoEvento = {
-        cabecalho:"Informações do Evento",
-        url:`/adm/painel/${url}/evento`,
-        infos:[
-            {campo:"Nome do Evento:", valor:dadosEvento.nome || defaultValue},
-            {campo:"Local do Evento:", valor:local || defaultValue},
-            {campo:"Data de Início:", valor:dataInicio || defaultValue},
-            {campo:"Data de Término:", valor:dataTermino || defaultValue},
-            {campo:"Hora de Início:", valor:horaInicio || defaultValue},
-            {campo:"Hora de Término:", valor:horaTermino || defaultValue},
-        ]
-    };
-
-    const infoPagamento = {
-        cabecalho:"Dados de Pagamento",
-        url:`/adm/painel/${url}/pagamentos`,
-        infos:[
-            {campo:"Chave Pix A:", valor:chavePixA || defaultValue},
-            {campo:"Nome A:", valor:nomePixA || defaultValue},
-            {campo:"Chave Pix B:", valor:chavePixB || defaultValue},
-            {campo:"Nome B:", valor:nomePixB || defaultValue},
-        ]
-    };
-
-    const resumo = [infoPraca, infoEvento, infoPagamento];
-
-    return (    
-        <div className="painel-home w-90">
-            <h1 className="text-center fs-3">RESUMO DE INFORMAÇÕES</h1>
-
-            <div className="painel-home-section border border-secondary rounded p-4">
+            <div className="painel-home-section row row-cols-md-3 g-2 p-4 w-100">
                 {resumo.map(({cabecalho, infos, url},id)=>{
                     return(
-                        <div key={id} className="border border-black shadow rounded mb-3 p-2">
-                            <header className="d-flex justify-content-around">
-                                <h3 className="text-center">{cabecalho}</h3>
-                                {url && <Link href={url}>
-                                    <i className="bi bi-pencil text-primary" style={{"font-size": "1.5em"}}></i>
-                                </Link>}
-                            </header>
-                            <hr />
-                            {infos.map((info,id)=>{
-                                return <ItemPainelHome key={id} info={info} />
-                            })}
+                        <div key={id} className="p-2 w-md-75">
+                            <div className="shadow-sm mb-3 p-2 bg-white rounded-3">
+                                <header className="d-flex gap-3 justify-content-center">
+                                    <h3 className="text-center">{cabecalho}</h3>
+                                    {url && <Link href={url}>
+                                        <i className="bi bi-pencil text-black" style={{"font-size": "1.5em"}}></i>
+                                    </Link> || <BtnPencil></BtnPencil>}
+                                </header>
+                                <hr />
+                                {infos.map((info,id)=>{
+                                    return <ItemPainelHome key={id} info={info} />
+                                })}
+                            </div>
                         </div>
                     )
                 })}
