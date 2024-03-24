@@ -1,5 +1,5 @@
-// export const URL = "http://localhost:5000";
-export const URL = "https://praca-r2-api.onrender.com";
+export const URL = "http://localhost:5000";
+// export const URL = "https://praca-r2-api.onrender.com";
 
 export const URL_BASE = `${URL}/api`;
 
@@ -12,3 +12,4 @@ export const URL_UPDATE_SENHA_CAIXA = `${URL_BASE}/praca/caixa`;
 export const URL_EVENTO = `${URL_BASE}/praca/evento`;
 export const URL_PAGAMENTOS = `${URL_BASE}/praca/pagamentos`;
 
+export const URL_PRODUTOS = `${URL_BASE}/produtos`;
