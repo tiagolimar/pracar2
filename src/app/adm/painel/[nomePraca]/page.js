@@ -6,10 +6,9 @@ import Link from "next/link.js";
 import { dadosPracaContext } from "@/contexts/dadosPracaContext";
 import CopyLinkButton from "@/components/adm/CopyLinkButton";
 import CopyButton from "@/components/adm/CopyButton";
-import getResume from './pageResume'
-import "./page.css"
-
-const defaultValue = 'Vazio';
+import getResume from './pageResume';
+import { defaultValue } from './pageResume';
+import "./page.css";
 
 function ItemPainelHome ({info}){
     const { campo, valor, tipo } = info;

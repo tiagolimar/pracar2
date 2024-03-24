@@ -1,3 +1,5 @@
+export const defaultValue = 'Vazio';
+
 function formatDate(dateString) {
     if (!dateString) return '';
     // Converte yyyy-mm-dd para dd/mm/yy

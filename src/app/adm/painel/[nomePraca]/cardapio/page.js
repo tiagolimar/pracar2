@@ -6,7 +6,8 @@ import axios from 'axios';
 import { dadosPracaContext } from '@/contexts/dadosPracaContext';
 import { URL_PRODUTOS } from '@/components/URLs';
 import LoadingData from '@/components/LoadingData';
-import ItemProduto from './../../../../../components/adm/painel/cardapio/ItemProduto';
+import ItemProduto from '@/components/adm/painel/cardapio/ItemProduto';
+import Filtros from '@/components/adm/painel/cardapio/Filtros';
 
 export default function Cardapio (){
     const [isLoading, setIsLoading] = useState(false);
@@ -44,13 +45,13 @@ export default function Cardapio (){
 
     return(
         <div className='container mt-4'>
-        <div className="row row-cols-md-3  row-cols-1 w-100 p-4 g-2">
-            {produtos.map((produto,id)=>(
-                <ItemProduto key={id} produto={produto} />
-            ))}
-        </div>
-        <LoadingData on={isLoading} />            
-        
+            <Filtros />
+            <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 w-100 p-4 g-2">
+                {produtos.map((produto,id)=>(
+                    <ItemProduto key={id} produto={produto} />
+                ))}
+            </div>
+            <LoadingData on={isLoading} />            
         </div>
     )
 }
