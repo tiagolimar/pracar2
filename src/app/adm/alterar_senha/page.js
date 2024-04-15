@@ -58,7 +58,7 @@ export default function AlterarSenha (){
 
     return(
 		<ContainerMain>
-            <BackHome url={url}/>
+            {/* <BackHome url={url}/> */}
 			<h1>Praça R2</h1>
 			<h3 className="text-secondary">Alteração de Senha</h3>
 			<form method="post" onSubmit={handleSubmit} className="w-100 d-flex flex-column gap-3">
