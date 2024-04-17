@@ -1,5 +1,5 @@
-// export const URL = "http://localhost:5000";
-export const URL = "https://praca-r2-api.onrender.com";
+const LOCAL = true;
+export const URL = LOCAL ? "http://localhost:5000" : "https://praca-r2-api.onrender.com";
 
 export const URL_BASE = `${URL}/api`;
 
