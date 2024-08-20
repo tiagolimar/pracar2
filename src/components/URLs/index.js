@@ -1,4 +1,4 @@
-const LOCAL = true;
+const LOCAL = false;
 export const URL = LOCAL ? "http://localhost:5000" : "https://praca-r2-api.onrender.com";
 
 export const URL_BASE = `${URL}/api`;
